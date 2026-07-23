@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<meta name="ext-resource-dependency" content="uploads/Imagenes_Web_DreamClean/02_Residential_2400w.jpg" data-resource-id="svcResidential" />
+<meta name="ext-resource-dependency" content="uploads/Imagenes_Web_DreamClean/03_Commercial_2400w.jpg" data-resource-id="svcCommercial" />
+<meta name="ext-resource-dependency" content="uploads/Imagenes_Web_DreamClean/04_VacationRental_2400w.jpg" data-resource-id="svcRentals" />
+<meta name="ext-resource-dependency" content="uploads/Imagenes_Web_DreamClean/05_MoveInOut_2400w.jpg" data-resource-id="svcMoveout" />
+<template id="__bundler_thumbnail" data-bg-color="#3A332A">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#3A332A"/>
+    <circle cx="600" cy="330" r="150" fill="none" stroke="#B68911" stroke-width="6"/>
+    <text x="600" y="345" font-family="Georgia,serif" font-size="120" fill="#B68911" text-anchor="middle" font-style="italic">DC</text>
+    <text x="600" y="560" font-family="Arial,sans-serif" font-size="34" letter-spacing="4" fill="#F1E9DF" text-anchor="middle">DREAM CLEAN BY DC</text>
+  </svg>
+</template>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Dream Clean by DC — Luxury Cleaning, Orlando FL</title>
+<link rel="stylesheet" href="_ds/dream-clean-design-system-3942b4b0-2ba8-4ffc-b1cc-bcec59a66d3f/tokens/colors.css">
+<link rel="stylesheet" href="_ds/dream-clean-design-system-3942b4b0-2ba8-4ffc-b1cc-bcec59a66d3f/tokens/typography.css">
+<link rel="stylesheet" href="_ds/dream-clean-design-system-3942b4b0-2ba8-4ffc-b1cc-bcec59a66d3f/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/dream-clean-design-system-3942b4b0-2ba8-4ffc-b1cc-bcec59a66d3f/tokens/effects.css">
+<link rel="stylesheet" href="_ds/dream-clean-design-system-3942b4b0-2ba8-4ffc-b1cc-bcec59a66d3f/styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap">
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="./image-slot.js"></script>
+<script src="_ds/dream-clean-design-system-3942b4b0-2ba8-4ffc-b1cc-bcec59a66d3f/_ds_bundle.js"></script>
+<style>
+  body{margin:0;background:var(--surface-canvas);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  a:hover{color:var(--dc-gold)}
+  @keyframes scrollcue{0%{transform:translateY(-100%)}100%{transform:translateY(250%)}}
+  @keyframes heroGlow{0%,100%{transform:rotate(0deg) scale(1)}50%{transform:rotate(8deg) scale(1.08)}}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  ::-webkit-scrollbar{display:none}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="position:relative;font-family:var(--font-body);color:var(--text-body);line-height:1.6;background:var(--surface-canvas)">
+
+<div ref="{{ cursorRef }}" style="position:fixed;top:0;left:0;width:8px;height:8px;border-radius:50%;background:var(--dc-gold);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:opacity .2s,transform .2s;opacity:0"></div>
+
+<header ref="{{ navRef }}" style="position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,5vw,64px);transition:padding .28s var(--ease-standard),background .28s var(--ease-standard),box-shadow .28s var(--ease-standard)">
+  <a href="#top"><img src="assets/logos/horizontal_gold_espresso_on_transparent.png" alt="Dream Clean by DC" style="height:34px;display:block"></a>
+  <nav style="display:{{ navLinksDisplay }};gap:34px;font-size:var(--text-small);letter-spacing:.02em">
+    <a href="#services" style-hover="color:var(--dc-gold)">{{ t.navServices }}</a>
+    <a href="#process" style-hover="color:var(--dc-gold)">{{ t.navProcess }}</a>
+    <a href="#reviews" style-hover="color:var(--dc-gold)">{{ t.navReviews }}</a>
+    <a href="https://dreamclean-by-dc.vercel.app" target="_blank" rel="noopener" style-hover="color:var(--dc-gold)">{{ t.navPortal }}</a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:16px">
+    <button onClick="{{ toggleLang }}" style="display:flex;align-items:center;gap:6px;border:1px solid var(--border-subtle);border-radius:100px;padding:6px 12px;background:#fff;cursor:pointer;font-family:'Montserrat',var(--font-body);font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--dc-espresso)">
+      <span style="{{ enActiveStyle }}">EN</span><span style="color:var(--border-subtle)">/</span><span style="{{ esActiveStyle }}">ES</span>
+    </button>
+    <div style="display:{{ ctaDisplay }}">
+      <x-import component-from-global-scope="DreamCleanDesignSystem_3942b4.Button" hint-size="auto,40px" variant="outline" size="sm" onClick="{{ goEstimate }}">{{ t.navCta }}</x-import>
+    </div>
+    <button onClick="{{ toggleMenu }}" aria-label="Menu" style="display:{{ burgerDisplay }};flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px">
+      <span style="width:22px;height:1.5px;background:var(--dc-espresso);display:block"></span>
+      <span style="width:22px;height:1.5px;background:var(--dc-espresso);display:block"></span>
+      <span style="width:22px;height:1.5px;background:var(--dc-espresso);display:block"></span>
+    </button>
+  </div>
+</header>
+
+<sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;top:74px;left:0;right:0;z-index:499;background:var(--surface-canvas);display:flex;flex-direction:column;padding:24px;gap:18px;box-shadow:var(--shadow-lg);border-bottom:1px solid var(--border-subtle);font-size:15px">
+    <a href="#services" onClick="{{ toggleMenu }}">{{ t.navServices }}</a>
+    <a href="#process" onClick="{{ toggleMenu }}">{{ t.navProcess }}</a>
+    <a href="#reviews" onClick="{{ toggleMenu }}">{{ t.navReviews }}</a>
+    <a href="https://dreamclean-by-dc.vercel.app" target="_blank" rel="noopener">{{ t.navPortal }}</a>
+    <a onClick="{{ goEstimate }}" style="color:var(--dc-gold);font-weight:600;cursor:pointer">{{ t.navCta }}</a>
+  </div>
+</sc-if>
+
+<main id="top">
+
+<!-- ===== HERO — full-bleed cinematic scene ===== -->
+<section style="position:relative;height:100vh;min-height:680px;display:flex;flex-direction:column;overflow:hidden;background:var(--dc-espresso)">
+  <div style="position:absolute;inset:0">
+    <image-slot id="hero-photo" src="uploads/Imagenes_Web_DreamClean/01_Banner_Hero_2400w.jpg" placeholder="Full-bleed editorial hero, wide-angle: sunlit luxury living room at golden hour. Warm light through sheer linen curtains, polished hardwood, crisp white upholstery, a single eucalyptus stem on a tray. No people, no clutter. True-to-life warm grade, never cold/blue. Soft vignette on the left third for the headline. Feeling: quiet luxury, freshly restored." shape="rect" style="color:rgba(245,245,239,.22)"></image-slot>
+  </div>
+  <div style="position:absolute;inset:0;background:rgba(58,51,44,.08);mix-blend-mode:multiply"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(24,18,12,.6) 0%,rgba(24,18,12,0) 60%)"></div>
+  <div ref="{{ heroGlowRef }}" style="position:absolute;top:-20%;right:-10%;width:60vw;height:60vw;max-width:820px;max-height:820px;border-radius:50%;background:radial-gradient(circle,rgba(182,137,17,.28) 0%,rgba(182,137,17,0) 70%);animation:heroGlow 14s ease-in-out infinite;pointer-events:none"></div>
+  <div ref="{{ heroBadgeRef }}" style="position:absolute;top:14%;right:6%;padding:10px 18px;border:1px solid rgba(245,245,239,.35);border-radius:100px;color:var(--text-on-dark);font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;backdrop-filter:blur(6px);background:rgba(58,51,44,.25);display:{{ badgeDisplay }}">Est. Orlando, FL</div>
+
+  <div style="position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;padding:100px clamp(24px,6vw,80px) 0;max-width:1400px;margin:0 auto;width:100%;box-sizing:border-box">
+    <div data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);font-size:var(--text-small);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dc-gold-light);margin-bottom:22px">{{ t.heroEyebrow }}</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(3.4rem,9vw,8.5rem);line-height:.96;letter-spacing:-.02em;margin:0;font-weight:600;color:var(--text-on-dark);max-width:16ch">
+      <span data-reveal="fade" style="display:block;opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease-out-soft),transform 1s var(--ease-out-soft)">{{ t.heroLine1 }}</span>
+      <span data-reveal="fade" style="display:block;opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease-out-soft) .12s,transform 1s var(--ease-out-soft) .12s">{{ t.heroLine2 }}</span>
+      <span data-reveal="fade" style="display:block;opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease-out-soft) .24s,transform 1s var(--ease-out-soft) .24s;font-style:italic;color:var(--dc-gold-light)">{{ t.heroLine3 }}</span>
+    </h1>
+    <p data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft) .4s,transform .8s var(--ease-out-soft) .4s;font-size:var(--text-lead);color:var(--dc-arena);text-shadow:0 2px 14px rgba(24,18,12,.55);max-width:440px;margin:28px 0 0">{{ t.heroSub }}</p>
+    <img data-reveal="fade" src="assets/logos/submark_gold_on_espresso.png" alt="Dream Clean by DC" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft) .5s,transform .8s var(--ease-out-soft) .5s;width:64px;margin-top:44px">
+  </div>
+
+  <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding-bottom:28px;font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-on-dark-muted)">
+    <span style="width:1px;height:34px;background:rgba(245,245,239,.35);position:relative;overflow:hidden"><span style="position:absolute;top:0;left:0;width:100%;height:40%;background:var(--dc-gold);animation:scrollcue 1.8s ease-in-out infinite"></span></span>
+    Scroll
+  </div>
+</section>
+
+<!-- ===== MARQUEE — kinetic trust strip ===== -->
+<section style="padding:22px 0;background:var(--surface-section);border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);overflow:hidden">
+  <div style="display:flex;width:max-content;animation:marquee 22s linear infinite">
+    <div style="display:flex;gap:48px;padding-right:48px;font-family:'Montserrat',var(--font-body);font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dc-espresso);white-space:nowrap">
+      <span>Licensed</span><span style="color:var(--dc-gold)">·</span><span>Insured</span><span style="color:var(--dc-gold)">·</span><span>Background-Checked</span><span style="color:var(--dc-gold)">·</span><span>5.0★ Rated</span><span style="color:var(--dc-gold)">·</span>
+    </div>
+    <div style="display:flex;gap:48px;padding-right:48px;font-family:'Montserrat',var(--font-body);font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dc-espresso);white-space:nowrap">
+      <span>Licensed</span><span style="color:var(--dc-gold)">·</span><span>Insured</span><span style="color:var(--dc-gold)">·</span><span>Background-Checked</span><span style="color:var(--dc-gold)">·</span><span>5.0★ Rated</span><span style="color:var(--dc-gold)">·</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MANIFESTO — pinned scroll-linked text reveal ===== -->
+<section ref="{{ manifestoOuterRef }}" style="position:relative;height:240vh">
+  <div style="position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;padding:0 clamp(24px,8vw,140px);background:var(--surface-canvas)">
+    <p style="font-family:var(--font-display);font-size:clamp(1.8rem,4.4vw,3.6rem);line-height:1.3;text-align:center;font-weight:600;max-width:1100px;margin:0">
+      <span data-word style="opacity:.16;transition:opacity .3s linear">We</span> <span data-word style="opacity:.16;transition:opacity .3s linear">don't</span> <span data-word style="opacity:.16;transition:opacity .3s linear">just</span> <span data-word style="opacity:.16;transition:opacity .3s linear">clean</span> <span data-word style="opacity:.16;transition:opacity .3s linear;color:var(--dc-gold)">—</span> <span data-word style="opacity:.16;transition:opacity .3s linear">we</span> <span data-word style="opacity:.16;transition:opacity .3s linear;font-style:italic;color:var(--dc-gold)">restore</span> <span data-word style="opacity:.16;transition:opacity .3s linear">the</span> <span data-word style="opacity:.16;transition:opacity .3s linear">feeling</span> <span data-word style="opacity:.16;transition:opacity .3s linear">of</span> <span data-word style="opacity:.16;transition:opacity .3s linear">coming</span> <span data-word style="opacity:.16;transition:opacity .3s linear">home</span> <span data-word style="opacity:.16;transition:opacity .3s linear">to</span> <span data-word style="opacity:.16;transition:opacity .3s linear">something</span> <span data-word style="opacity:.16;transition:opacity .3s linear;font-style:italic;color:var(--dc-gold)">extraordinary.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ===== SERVICES — expanding photographic panels ===== -->
+<section id="services" style="padding:0 0 160px;background:var(--surface-canvas)">
+  <div style="max-width:var(--container-narrow);margin:0 auto;text-align:center;padding:100px 24px 56px">
+    <div data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dc-gold);font-weight:500;margin-bottom:14px">What we do</div>
+    <h2 data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);font-family:var(--font-display);font-size:var(--text-display-lg);margin:0;font-weight:600">Cleaning, tailored to the space</h2>
+  </div>
+  <div data-reveal="fade" style="opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease-out-soft),transform .9s var(--ease-out-soft);display:flex;height:min(70vh,620px);gap:4px;border-radius:24px;overflow:hidden;max-width:var(--container-max);margin:0 auto;padding:0 24px;box-sizing:border-box">
+    <sc-for list="{{ services }}" as="svc" hint-placeholder-count="4">
+      <div data-idx="{{ svc.idx }}" onMouseEnter="{{ setActiveService }}" onClick="{{ setActiveService }}" style="position:relative;min-width:64px;overflow:hidden;cursor:pointer;transition:flex .6s var(--ease-out-soft);flex:{{ svc.grow }} 1 0%">
+        <image-slot id="{{ svc.imgId }}" src="{{ svc.imgSrc }}" placeholder="{{ svc.imgPlaceholder }}" shape="rect" style="color:rgba(245,245,239,.22)"></image-slot>
+        <div style="position:absolute;inset:0;background:rgba(58,51,44,.08);mix-blend-mode:multiply"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,51,44,0) 35%,rgba(58,51,44,.88) 100%)"></div>
+        <div style="position:absolute;left:22px;right:22px;bottom:22px;color:#fff">
+          <div style="font-family:var(--font-display);font-size:13px;color:var(--dc-gold-light);letter-spacing:.1em;margin-bottom:8px">{{ svc.num }}</div>
+          <h3 style="font-family:var(--font-display);font-size:clamp(18px,1.8vw,26px);margin:0 0 8px;font-weight:600;white-space:nowrap">{{ svc.label }}</h3>
+          <p style="font-size:13.5px;line-height:1.5;margin:0;overflow:hidden;transition:max-height .5s ease,opacity .4s ease;max-height:{{ svc.descMaxHeight }};opacity:{{ svc.descOpacity }}">{{ svc.desc }}</p>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- ===== SHOWCASE — interactive before / after ===== -->
+<section style="max-width:var(--container-max);margin:0 auto;padding:20px 24px 160px">
+  <div style="max-width:var(--container-narrow);margin:0 auto;text-align:center;padding:0 24px 56px">
+    <div data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dc-gold);font-weight:500;margin-bottom:14px">The result</div>
+    <h2 data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);font-family:var(--font-display);font-size:var(--text-display-lg);margin:0 0 18px;font-weight:600">Every visit ends the same way</h2>
+    <p data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);color:var(--text-muted);font-size:var(--text-body-lg);margin:0">Spotless surfaces, straightened rooms, and a space that feels reset — not just wiped down. Drag the divider to see the difference.</p>
+  </div>
+  <div data-reveal="scale" ref="{{ sliderRef }}" onPointerDown="{{ onSliderDown }}" onPointerMove="{{ onSliderMove }}" onPointerUp="{{ onSliderUp }}" style="opacity:0;transform:scale(.96);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);position:relative;max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);cursor:ew-resize;user-select:none">
+    <div style="position:absolute;inset:-14px 14px auto -14px;top:auto;bottom:-14px;height:60%;border:1px solid var(--dc-gold);border-radius:20px;opacity:.3;transform:rotate(-1.2deg);pointer-events:none;z-index:-1"></div>
+    <image-slot id="showcase-after" src="assets/before-after/after-oven.jpg" placeholder="AFTER — same room, same camera angle as Before: surfaces cleared and gleaming, cushions plumped, warm golden-hour light, styled like a magazine reveal. True-to-life warm grade, never cold. Feeling: calm, restored, editorial." shape="rect" style="position:absolute;inset:0;color:rgba(58,51,44,.22)"></image-slot>
+    <div style="position:absolute;inset:0;overflow:hidden;clip-path:{{ beforeClip }}">
+      <image-slot id="showcase-before" src="assets/before-after/before-oven.jpg" placeholder="BEFORE — same room, same angle: naturally lived-in — folded laundry, a few dishes, daily clutter — but warmly and evenly lit, never staged as grim or dirty. Feeling: authentically in-use, ready for its reset." shape="rect" style="position:absolute;inset:0;color:rgba(58,51,44,.22)"></image-slot>
+    </div>
+    <img src="assets/logos/submark_gold_on_espresso.png" alt="" style="position:absolute;bottom:14px;right:14px;width:34px;opacity:.85;pointer-events:none;z-index:2">
+    <div style="position:absolute;top:16px;left:16px;padding:6px 14px;border-radius:100px;background:rgba(58,51,44,.55);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(4px)">Before</div>
+    <div style="position:absolute;top:16px;right:16px;padding:6px 14px;border-radius:100px;background:rgba(182,137,17,.85);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase">After</div>
+    <div style="position:absolute;top:0;bottom:0;width:3px;background:#fff;left:{{ sliderPos }}%;transform:translateX(-50%);box-shadow:0 0 12px rgba(0,0,0,.3)">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);font-size:14px;color:var(--dc-espresso)">⇔</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS — pinned scrollytelling ===== -->
+<section id="process" ref="{{ processOuterRef }}" style="position:relative;height:340vh;background:var(--dc-espresso)">
+  <div style="position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 clamp(24px,7vw,100px);color:var(--text-on-dark);overflow:hidden">
+    <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dc-gold-light);font-weight:500;margin-bottom:24px">How it works · {{ processStepLabel }}</div>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,5vw,64px);align-items:center">
+      <div style="font-family:var(--font-display);font-size:clamp(6rem,14vw,13rem);font-weight:600;color:var(--dc-gold);line-height:1;opacity:.9">{{ processStepNum }}</div>
+      <div style="max-width:560px">
+        <h3 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);margin:0 0 18px;font-weight:600">{{ processStepTitle }}</h3>
+        <p style="font-size:var(--text-lead);color:var(--text-on-dark-muted);margin:0">{{ processStepDesc }}</p>
+      </div>
+    </div>
+    <div style="position:absolute;left:clamp(24px,7vw,100px);bottom:56px;display:flex;gap:10px">
+      <sc-for list="{{ processDots }}" as="dot" hint-placeholder-count="4">
+        <div style="width:{{ dot.width }};height:4px;border-radius:3px;background:{{ dot.bg }};transition:width .4s var(--ease-out-soft),background .4s"></div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS — drag carousel ===== -->
+<section id="reviews" style="padding:140px 0;max-width:100%;background:var(--surface-section);overflow:hidden">
+  <div style="max-width:var(--container-narrow);margin:0 auto;text-align:center;padding:0 24px 56px">
+    <div data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dc-gold);font-weight:500;margin-bottom:14px">Reviews</div>
+    <h2 data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);font-family:var(--font-display);font-size:var(--text-display-lg);margin:0;font-weight:600">What clients notice first</h2>
+  </div>
+  <div ref="{{ reviewsScrollRef }}" style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px clamp(24px,8vw,120px) 20px">
+    <blockquote style="scroll-snap-align:center;flex:0 0 min(420px,82vw);margin:0;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:16px;padding:36px 30px;display:flex;flex-direction:column;gap:22px" style-hover="box-shadow:var(--shadow-lg)">
+      <p style="font-family:var(--font-display);font-style:italic;font-size:21px;line-height:1.5;color:var(--dc-espresso);margin:0">"Reliable, vetted, and on time — every single visit. Our rental turnovers have never been this consistent."</p>
+      <cite style="font-size:var(--text-small);color:var(--text-muted);font-style:normal">Property Manager, Celebration</cite>
+    </blockquote>
+    <blockquote style="scroll-snap-align:center;flex:0 0 min(420px,82vw);margin:0;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:16px;padding:36px 30px;display:flex;flex-direction:column;gap:22px" style-hover="box-shadow:var(--shadow-lg)">
+      <p style="font-family:var(--font-display);font-style:italic;font-size:21px;line-height:1.5;color:var(--dc-espresso);margin:0">"They leave the house magazine-ready. It's the first cleaning service that's actually made a difference."</p>
+      <cite style="font-size:var(--text-small);color:var(--text-muted);font-style:normal">Homeowner, Orlando</cite>
+    </blockquote>
+    <blockquote style="scroll-snap-align:center;flex:0 0 min(420px,82vw);margin:0;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:16px;padding:36px 30px;display:flex;flex-direction:column;gap:22px" style-hover="box-shadow:var(--shadow-lg)">
+      <p style="font-family:var(--font-display);font-style:italic;font-size:21px;line-height:1.5;color:var(--dc-espresso);margin:0">"Professional from the first call. Our office always feels welcoming for clients now."</p>
+      <cite style="font-size:var(--text-small);color:var(--text-muted);font-style:normal">Office Manager, Downtown Orlando</cite>
+    </blockquote>
+    <blockquote style="scroll-snap-align:center;flex:0 0 min(420px,82vw);margin:0;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:16px;padding:36px 30px;display:flex;flex-direction:column;gap:22px" style-hover="box-shadow:var(--shadow-lg)">
+      <p style="font-family:var(--font-display);font-style:italic;font-size:21px;line-height:1.5;color:var(--dc-espresso);margin:0">"Booking was effortless and the results speak for themselves. Worth every penny."</p>
+      <cite style="font-size:var(--text-small);color:var(--text-muted);font-style:normal">Vacation Rental Owner, Kissimmee</cite>
+    </blockquote>
+  </div>
+  <div style="display:flex;justify-content:center;gap:12px;margin-top:8px">
+    <button onClick="{{ scrollReviewsPrev }}" style="width:44px;height:44px;border-radius:50%;border:1px solid var(--border-subtle);background:var(--surface-canvas);cursor:pointer;font-size:16px" style-hover="background:var(--dc-espresso);color:#fff">←</button>
+    <button onClick="{{ scrollReviewsNext }}" style="width:44px;height:44px;border-radius:50%;border:1px solid var(--border-subtle);background:var(--surface-canvas);cursor:pointer;font-size:16px" style-hover="background:var(--dc-espresso);color:#fff">→</button>
+  </div>
+</section>
+
+<!-- ===== ESTIMATE MODAL ===== -->
+<sc-if value="{{ estimateOpen }}" hint-placeholder-val="{{ false }}">
+<div data-lenis-prevent style="position:fixed;inset:0;z-index:800;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:60px 24px">
+  <div onClick="{{ closeEstimate }}" style="position:fixed;inset:0;background:rgba(24,18,12,.72);backdrop-filter:blur(4px)"></div>
+  <button onClick="{{ closeEstimate }}" aria-label="Close" style="position:fixed;top:24px;right:clamp(20px,5vw,64px);z-index:2;width:44px;height:44px;border-radius:50%;border:1px solid rgba(245,245,239,.35);background:rgba(58,51,44,.5);color:#fff;font-size:18px;cursor:pointer">✕</button>
+  <section id="estimate" style="position:relative;z-index:1;width:100%;max-width:520px;background:var(--surface-dark);border-radius:24px;padding:64px 24px 60px;color:var(--text-on-dark);box-shadow:var(--shadow-dark-lg)">
+  <div style="max-width:var(--container-narrow);margin:0 auto;text-align:center;padding:0 24px 40px">
+    <img src="assets/logos/horizontal_reversed_on_espresso.png" alt="Dream Clean by DC" style="height:30px;margin:0 auto 22px;display:block">
+    <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dc-gold-light);font-weight:600;margin-bottom:14px">Free instant estimate</div>
+    <h2 style="font-family:var(--font-display);font-size:var(--text-display-md);margin:0;font-weight:600;color:var(--text-on-dark)">See your price in under a minute</h2>
+    <p style="margin-top:14px;font-size:var(--text-body);color:rgba(245,245,239,.78)">A few quick questions — no call needed. Final pricing is always confirmed with you before booking.</p>
+  </div>
+
+  <div style="max-width:460px;margin:0 auto">
+    <div style="background:#fff;border-radius:16px;padding:30px 26px;color:var(--text-body);box-shadow:var(--shadow-dark-lg)">
+
+      <div style="display:flex;gap:6px;justify-content:center;margin-bottom:22px">
+        <sc-for list="{{ dots }}" as="dot" hint-placeholder-count="4">
+          <div style="width:28px;height:4px;border-radius:3px;transition:.25s;{{ dot.style }}"></div>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{ step1 }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted);margin:0 0 9px;font-weight:600">Type of cleaning</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <sc-for list="{{ typeOptions }}" as="opt" hint-placeholder-count="4">
+            <div data-key="{{ opt.key }}" onClick="{{ selectType }}" style="border:1px solid var(--border-subtle);border-radius:6px;padding:11px 8px;font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:.15s;{{ opt.style }}">{{ opt.label }}</div>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ notCommercial }}" hint-placeholder-val="{{ true }}">
+        <div>
+          <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted);margin:18px 0 9px;font-weight:600">Approx. size</div>
+          <div style="text-align:center;font-family:var(--font-display);font-size:26px;font-weight:600;color:var(--dc-espresso)">{{ sqftOut }} <span style="font-size:13px;color:var(--text-muted);font-family:var(--font-body);font-weight:500">sq ft</span></div>
+          <input type="range" min="400" max="6000" step="50" value="{{ sqft }}" onChange="{{ onSqftChange }}" style="width:100%;margin-top:8px;accent-color:var(--dc-gold);height:4px">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-top:2px"><span>400</span><span>6,000+</span></div>
+
+          <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted);margin:18px 0 9px;font-weight:600">Bedrooms</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+            <sc-for list="{{ bedOptions }}" as="opt" hint-placeholder-count="6">
+              <div data-key="{{ opt.key }}" onClick="{{ selectBed }}" style="border:1px solid var(--border-subtle);border-radius:6px;padding:11px 8px;font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:.15s;{{ opt.style }}">{{ opt.label }}</div>
+            </sc-for>
+          </div>
+
+          <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted);margin:18px 0 9px;font-weight:600">Bathrooms</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+            <sc-for list="{{ bathOptions }}" as="opt" hint-placeholder-count="5">
+              <div data-key="{{ opt.key }}" onClick="{{ selectBath }}" style="border:1px solid var(--border-subtle);border-radius:6px;padding:11px 8px;font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:.15s;{{ opt.style }}">{{ opt.label }}</div>
+            </sc-for>
+          </div>
+
+          <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted);margin:18px 0 9px;font-weight:600">How often</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ freqOptions }}" as="opt" hint-placeholder-count="4">
+              <div data-key="{{ opt.key }}" onClick="{{ selectFreq }}" style="border:1px solid var(--border-subtle);border-radius:6px;padding:11px 14px;font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:.15s;{{ opt.style }}">{{ opt.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isCommercial }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:18px;background:var(--surface-canvas);border:1px solid var(--border-subtle);border-radius:6px;padding:14px;font-size:12.5px;color:var(--text-muted);line-height:1.5;text-align:center">Commercial spaces are custom-quoted after a quick, free on-site walkthrough. Share your info on the next step and we'll follow up to schedule it.</div>
+        </sc-if>
+
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button onClick="{{ continueStep1 }}" style="flex:1;border:none;cursor:pointer;font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:13px;border-radius:6px;transition:transform .15s;background:var(--dc-gold);color:#fff" style-hover="transform:translateY(-1px)">Continue</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ step2 }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted);margin:0 0 9px;font-weight:600">Anything extra? (optional)</div>
+
+        <sc-if value="{{ isStandardOrDeep }}" hint-placeholder-val="{{ true }}">
+        <div>
+          <div onClick="{{ toggleAddon }}" data-addon="pets" style="display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border-subtle);border-radius:6px;padding:12px 14px;margin-bottom:8px;cursor:pointer">
+            <div style="display:flex;gap:11px;align-items:flex-start">
+              <span style="flex:0 0 18px;width:18px;height:18px;border:1.5px solid var(--border-subtle);border-radius:5px;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff;{{ petsCheckStyle }}">
+                <sc-if value="{{ petsOn }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#fff;stroke-width:3;fill:none"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
+              </span>
+              <div><div style="font-size:12.5px;font-weight:700;color:var(--dc-espresso)">Pets in the home</div><div style="font-size:10.5px;color:var(--text-muted);margin-top:1px">Just so the crew knows</div></div>
+            </div>
+          </div>
+
+          <div style="font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);font-weight:700;margin:14px 0 6px 2px">Appliances</div>
+          <div onClick="{{ toggleAddon }}" data-addon="oven" style="display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border-subtle);border-radius:6px;padding:12px 14px;margin-bottom:8px;cursor:pointer">
+            <div style="display:flex;gap:11px;align-items:flex-start">
+              <span style="flex:0 0 18px;width:18px;height:18px;border:1.5px solid var(--border-subtle);border-radius:5px;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff;{{ ovenCheckStyle }}">
+                <sc-if value="{{ ovenOn }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#fff;stroke-width:3;fill:none"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
+              </span>
+              <div style="font-size:12.5px;font-weight:700;color:var(--dc-espresso)">Oven</div>
+            </div>
+          </div>
+          <div onClick="{{ toggleAddon }}" data-addon="fridge" style="display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border-subtle);border-radius:6px;padding:12px 14px;margin-bottom:8px;cursor:pointer">
+            <div style="display:flex;gap:11px;align-items:flex-start">
+              <span style="flex:0 0 18px;width:18px;height:18px;border:1.5px solid var(--border-subtle);border-radius:5px;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff;{{ fridgeCheckStyle }}">
+                <sc-if value="{{ fridgeOn }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#fff;stroke-width:3;fill:none"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
+              </span>
+              <div style="font-size:12.5px;font-weight:700;color:var(--dc-espresso)">Refrigerator</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border-subtle);border-radius:6px;padding:12px 14px;margin-bottom:8px">
+            <div style="font-size:12.5px;font-weight:700;color:var(--dc-espresso)">Interior Windows</div>
+            <div style="display:flex;align-items:center;gap:9px">
+              <button data-q="window" data-d="-1" onClick="{{ changeQty }}" style="width:25px;height:25px;border-radius:50%;border:1px solid var(--border-subtle);background:#fff;font-size:14px;cursor:pointer;line-height:1">−</button>
+              <span style="min-width:14px;text-align:center;font-weight:700;font-size:13px;color:var(--dc-espresso)">{{ windowQty }}</span>
+              <button data-q="window" data-d="1" onClick="{{ changeQty }}" style="width:25px;height:25px;border-radius:50%;border:1px solid var(--border-subtle);background:#fff;font-size:14px;cursor:pointer;line-height:1">+</button>
+            </div>
+          </div>
+          <div onClick="{{ toggleAddon }}" data-addon="cabinets" style="display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border-subtle);border-radius:6px;padding:12px 14px;margin-bottom:8px;cursor:pointer">
+            <div style="display:flex;gap:11px;align-items:flex-start">
+              <span style="flex:0 0 18px;width:18px;height:18px;border:1.5px solid var(--border-subtle);border-radius:5px;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff;{{ cabinetsCheckStyle }}">
+                <sc-if value="{{ cabinetsOn }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#fff;stroke-width:3;fill:none"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
+              </span>
+              <div style="font-size:12.5px;font-weight:700;color:var(--dc-espresso)">Interior Cabinets</div>
+            </div>
+          </div>
+          <div onClick="{{ toggleAddon }}" data-addon="baseboards" style="display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border-subtle);border-radius:6px;padding:12px 14px;margin-bottom:8px;cursor:pointer">
+            <div style="display:flex;gap:11px;align-items:flex-start">
+              <span style="flex:0 0 18px;width:18px;height:18px;border:1.5px solid var(--border-subtle);border-radius:5px;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff;{{ baseboardsCheckStyle }}">
+                <sc-if value="{{ baseboardsOn }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#fff;stroke-width:3;fill:none"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
+              </span>
+              <div style="font-size:12.5px;font-weight:700;color:var(--dc-espresso)">Baseboards &amp; Walls</div>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isMove }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div onClick="{{ toggleAddon }}" data-addon="pressure" style="display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border-subtle);border-radius:6px;padding:12px 14px;margin-bottom:8px;cursor:pointer">
+            <div style="display:flex;gap:11px;align-items:flex-start">
+              <span style="flex:0 0 18px;width:18px;height:18px;border:1.5px solid var(--border-subtle);border-radius:5px;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff;{{ pressureCheckStyle }}">
+                <sc-if value="{{ pressureOn }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#fff;stroke-width:3;fill:none"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
+              </span>
+              <div style="font-size:12.5px;font-weight:700;color:var(--dc-espresso)">Pressure Washing</div>
+            </div>
+          </div>
+          <div onClick="{{ toggleAddon }}" data-addon="paint" style="display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border-subtle);border-radius:6px;padding:12px 14px;margin-bottom:8px;cursor:pointer">
+            <div style="display:flex;gap:11px;align-items:flex-start">
+              <span style="flex:0 0 18px;width:18px;height:18px;border:1.5px solid var(--border-subtle);border-radius:5px;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff;{{ paintCheckStyle }}">
+                <sc-if value="{{ paintOn }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#fff;stroke-width:3;fill:none"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
+              </span>
+              <div style="font-size:12.5px;font-weight:700;color:var(--dc-espresso)">Interior Painting</div>
+            </div>
+          </div>
+          <sc-if value="{{ showPaintDetail }}" hint-placeholder-val="{{ false }}">
+          <div style="margin:-2px 0 14px">
+            <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted);margin:6px 0 9px;font-weight:600">Approx. sq ft to paint</div>
+            <div style="text-align:center;font-family:var(--font-display);font-size:26px;font-weight:600;color:var(--dc-espresso)">{{ paintSqftOut }} <span style="font-size:13px;color:var(--text-muted);font-family:var(--font-body);font-weight:500">sq ft</span></div>
+            <input type="range" min="200" max="8000" step="50" value="{{ paintSqft }}" onChange="{{ onPaintSqftChange }}" style="width:100%;margin-top:8px;accent-color:var(--dc-gold);height:4px">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-top:2px"><span>200</span><span>8,000+</span></div>
+          </div>
+          </sc-if>
+        </div>
+        </sc-if>
+
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button onClick="{{ backToStep1 }}" style="flex:1;border:1px solid var(--border-subtle);cursor:pointer;font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:13px;border-radius:6px;background:transparent;color:var(--dc-espresso)">Back</button>
+          <button onClick="{{ continueStep2 }}" style="flex:1;border:none;cursor:pointer;font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:13px;border-radius:6px;transition:transform .15s;background:var(--dc-gold);color:#fff" style-hover="transform:translateY(-1px)">Continue</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ step3 }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="font-family:var(--font-display);font-size:20px;font-weight:600;text-align:center;color:var(--dc-espresso)">Where should we send it?</div>
+        <div style="font-size:12px;color:var(--text-muted);text-align:center;margin-top:4px;line-height:1.4">We'll get your estimate right over, and follow up if you'd like help booking.</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px">
+          <label style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted)">Full name</label>
+          <input type="text" placeholder="Jane Smith" autoComplete="name" value="{{ name }}" onChange="{{ onNameChange }}" style="border-radius:6px;padding:11px 12px;font-size:14px;font-family:var(--font-body);color:var(--dc-espresso);background:var(--surface-canvas);outline:none;{{ nameInputStyle }}">
+          <sc-if value="{{ nameErr }}" hint-placeholder-val="{{ false }}"><div style="font-size:10px;color:var(--status-danger);margin-top:2px">Please enter your full name.</div></sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px">
+          <label style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted)">Email</label>
+          <input type="email" placeholder="jane@email.com" autoComplete="email" value="{{ email }}" onChange="{{ onEmailChange }}" style="border-radius:6px;padding:11px 12px;font-size:14px;font-family:var(--font-body);color:var(--dc-espresso);background:var(--surface-canvas);outline:none;{{ emailInputStyle }}">
+          <sc-if value="{{ emailErr }}" hint-placeholder-val="{{ false }}"><div style="font-size:10px;color:var(--status-danger);margin-top:2px">Please enter a valid email address.</div></sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px">
+          <label style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted)">Phone</label>
+          <input type="tel" placeholder="(407) 555-0123" autoComplete="tel" value="{{ phone }}" onChange="{{ onPhoneChange }}" style="border-radius:6px;padding:11px 12px;font-size:14px;font-family:var(--font-body);color:var(--dc-espresso);background:var(--surface-canvas);outline:none;{{ phoneInputStyle }}">
+          <sc-if value="{{ phoneErr }}" hint-placeholder-val="{{ false }}"><div style="font-size:10px;color:var(--status-danger);margin-top:2px">Please enter a valid phone number.</div></sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px">
+          <label style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted)">Discount code (optional)</label>
+          <input type="text" placeholder="e.g. ATRIUM15" autoComplete="off" value="{{ discountCodeInput }}" onChange="{{ onDiscountCodeChange }}" style="border-radius:6px;padding:11px 12px;font-size:14px;font-family:var(--font-body);color:var(--dc-espresso);background:var(--surface-canvas);outline:none;border:1px solid var(--border-subtle);text-transform:uppercase">
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button onClick="{{ backFromStep3 }}" style="flex:1;border:1px solid var(--border-subtle);cursor:pointer;font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:13px;border-radius:6px;background:transparent;color:var(--dc-espresso)">Back</button>
+          <button onClick="{{ validateAndSubmit }}" style="flex:1;border:none;cursor:pointer;font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:13px;border-radius:6px;background:var(--dc-gold);color:#fff;{{ sendingStyle }}">{{ submitLabel }}</button>
+        </div>
+        <div style="font-size:10px;color:var(--text-muted);text-align:center;margin-top:12px;line-height:1.5">By continuing, you agree Dream Clean may contact you about this estimate.</div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ step4 }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="margin-top:4px;background:var(--surface-canvas);border-radius:6px;padding:20px 16px;text-align:center">
+          <sc-if value="{{ showDiscountRow }}" hint-placeholder-val="{{ false }}">
+          <div style="font-family:'Cormorant Garamond',var(--font-display);font-size:19px;color:var(--text-faint);text-decoration:line-through;line-height:1;margin-bottom:6px">{{ originalRange }}</div>
+          </sc-if>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:{{ resultFontSize }};color:{{ resultColor }};line-height:1">{{ resultRange }}</div>
+          <sc-if value="{{ showDiscountRow }}" hint-placeholder-val="{{ false }}">
+          <div style="display:inline-block;margin-top:10px;background:var(--dc-gold);color:#fff;font-family:'Montserrat',var(--font-body);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:100px">{{ discountBadgeText }}</div>
+          </sc-if>
+          <sc-if value="{{ showDiscountInvalid }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:11px;color:var(--status-danger);margin-top:8px">That code isn't valid or active — estimate shown without a discount.</div>
+          </sc-if>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:8px;line-height:1.4">{{ resultLabel }}</div>
+        </div>
+        <div style="font-size:10px;color:var(--text-muted);text-align:center;margin-top:12px;line-height:1.5">This is an estimate only — not a final price. Your total may vary based on the size, condition, and specific needs of your space. Final pricing is confirmed once you book and speak with a Dream Clean representative.</div>
+        <a href="tel:+14074763556" style="margin-top:14px;display:block;width:100%;box-sizing:border-box;text-align:center;background:var(--dc-gold);color:#fff;font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:13px;border-radius:6px">Call to confirm &amp; book</a>
+        <div style="font-size:10.5px;color:var(--dc-sage);text-align:center;margin-top:10px;font-weight:600">{{ sentNote }}</div>
+        <button onClick="{{ backToStep1 }}" style="width:100%;margin-top:10px;border:1px solid var(--border-subtle);cursor:pointer;font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:13px;border-radius:6px;background:transparent;color:var(--dc-espresso)">Edit my answers</button>
+      </div>
+      </sc-if>
+
+    </div>
+  </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- ===== CTA — cinematic close ===== -->
+<section style="position:relative;text-align:center;padding:180px 24px;background:var(--surface-section);overflow:hidden">
+  <div style="position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(182,137,17,.14) 0%,rgba(182,137,17,0) 70%);pointer-events:none"></div>
+  <img src="assets/logos/submark_gold_on_espresso.png" alt="" style="position:relative;width:88px;opacity:.9;margin:0 auto 26px;display:block">
+  <h2 data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);position:relative;font-family:var(--font-display);font-size:clamp(2.4rem,5vw,4.4rem);margin:0 0 20px;font-weight:600">Ready for a spotless space?</h2>
+  <p data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);position:relative;color:var(--text-muted);max-width:480px;margin:0 auto 32px;font-size:var(--text-body-lg)">Licensed, insured, and trusted with the keys to homes, rentals, and offices across Central Florida.</p>
+  <div data-reveal="fade" onMouseMove="{{ handleMagnetMove }}" onMouseLeave="{{ handleMagnetLeave }}" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);position:relative;display:inline-block">
+    <x-import component-from-global-scope="DreamCleanDesignSystem_3942b4.Button" hint-size="220px,52px" variant="gold" size="lg" onClick="{{ goEstimate }}">Get Your Free Estimate</x-import>
+  </div>
+</section>
+
+</main>
+
+<footer style="background:var(--dc-espresso);color:var(--text-on-dark);padding:80px 24px 30px">
+  <div style="max-width:var(--container-max);margin:0 auto;display:flex;justify-content:space-between;gap:60px;flex-wrap:wrap;padding-bottom:50px;border-bottom:1px solid var(--border-on-dark)">
+    <img src="assets/logos/horizontal_reversed_on_espresso.png" alt="Dream Clean by DC" style="height:40px">
+    <div style="display:flex;gap:64px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dc-gold-light);margin-bottom:6px">Contact</div>
+        <a href="tel:+14074763556" style="font-size:var(--text-small);color:var(--text-on-dark-muted)" style-hover="color:var(--text-on-dark)">(407) 476-3556</a>
+        <a href="mailto:info@dreamcleanbydc.com" style="font-size:var(--text-small);color:var(--text-on-dark-muted)" style-hover="color:var(--text-on-dark)">info@dreamcleanbydc.com</a>
+        <a href="https://instagram.com/dreamcleanbydc" target="_blank" rel="noopener" style="font-size:var(--text-small);color:var(--text-on-dark-muted)" style-hover="color:var(--text-on-dark)">@dreamcleanbydc</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dc-gold-light);margin-bottom:6px">Service Area</div>
+        <span style="font-size:var(--text-small);color:var(--text-on-dark-muted)">Orlando</span>
+        <span style="font-size:var(--text-small);color:var(--text-on-dark-muted)">Central Florida</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dc-gold-light);margin-bottom:6px">Company</div>
+        <a href="#services" style="font-size:var(--text-small);color:var(--text-on-dark-muted)" style-hover="color:var(--text-on-dark)">Services</a>
+        <a href="#process" style="font-size:var(--text-small);color:var(--text-on-dark-muted)" style-hover="color:var(--text-on-dark)">Process</a>
+        <a onClick="{{ goEstimate }}" style="font-size:var(--text-small);color:var(--text-on-dark-muted);cursor:pointer" style-hover="color:var(--text-on-dark)">Estimate</a>
+        <sc-if value="{{ showClientPortalLink }}" hint-placeholder-val="{{ true }}">
+        <a href="https://dreamclean-by-dc.vercel.app" target="_blank" rel="noopener" style="font-size:var(--text-small);color:var(--text-on-dark-muted)" style-hover="color:var(--text-on-dark)">Client Portal ↗</a>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:var(--container-max);margin:0 auto;display:flex;justify-content:space-between;padding-top:22px;font-size:var(--text-caption);color:var(--text-on-dark-muted);letter-spacing:.04em;flex-wrap:wrap;gap:8px">
+    <span>© 2026 Dream Clean by DC</span><span>Licensed · Insured</span>
+  </div>
+</footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;enableCustomCursor&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Interactivity&quot;},&quot;enableSmoothScroll&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Interactivity&quot;},&quot;showClientPortalLink&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+const RATES = {
+  standard: { low: 0.16, high: 0.19, min: 120, name: "standard clean" },
+  deep:     { low: 0.24, high: 0.26, min: 200, name: "deep clean" },
+  move:     { low: 0.27, high: 0.33, min: 240, name: "move-in / move-out" }
+};
+const DISCOUNT   = { once:0, weekly:0.15, biweekly:0.10, monthly:0.05 };
+const FREQ_LABEL = { once:"One-time", weekly:"Weekly", biweekly:"Biweekly", monthly:"Monthly" };
+const FREQ_BY_TYPE = { standard:["once","weekly","biweekly","monthly"], deep:["once","monthly"], move:["once"] };
+const BATH_EXTRA = { low: 8, high: 12 };
+const SEL_STYLE = 'background:var(--dc-gold);color:#fff;border-color:var(--dc-gold)';
+const UNSEL_STYLE = 'background:var(--surface-canvas);color:var(--dc-espresso);border-color:var(--border-subtle)';
+const CHECK_ON = 'background:var(--dc-gold);border-color:var(--dc-gold)';
+const SERVICE_DEFS = [
+  { idx:0, num:'01', label:'Residential', imgId:'service-residential', imgSrc:(window.__resources && window.__resources.svcResidential) || 'uploads/Imagenes_Web_DreamClean/02_Residential_2400w.jpg', imgPlaceholder:"Large-format close-up: a perfectly made bed, crisp white linens, folded camel-toned throw at the foot. Soft raking window light, shallow depth of field, true-to-life warm tones. Tight crop, negative space at top for the title. Feeling: boutique-hotel warmth, just turned down.", desc:"Recurring home cleaning, deep cleans, and move-in/move-out — the kind of finish that looks magazine-ready." },
+  { idx:1, num:'02', label:'Commercial', imgId:'service-commercial', imgSrc:(window.__resources && window.__resources.svcCommercial) || 'uploads/Imagenes_Web_DreamClean/03_Commercial_2400w.jpg', imgPlaceholder:"Wide shot of a modern open-plan office lobby. Warm afternoon light across glass partitions and light-wood surfaces, one sculptural plant, no people. One-point perspective, negative space at base for the title. Feeling: calm, professional, quietly premium.", desc:'Offices, medical, and retail spaces cleaned on a schedule that never disrupts business hours.' },
+  { idx:2, num:'03', label:'Vacation Rentals', imgId:'service-rentals', imgSrc:(window.__resources && window.__resources.svcRentals) || 'uploads/Imagenes_Web_DreamClean/04_VacationRental_2400w.jpg', imgPlaceholder:"Styled vacation-rental living space: coastal-modern palette, neutral linen sofa with gold-toned pillows, large window with soft natural light. Slightly elevated angle, styled surfaces, clean space at bottom for the title. Feeling: guest-ready, aspirational, warm.", desc:'Airbnb & short-term rental turnovers, staged and ready before your next guest arrives.' },
+  { idx:3, num:'04', label:'Move-In / Move-Out', imgId:'service-moveout', imgSrc:(window.__resources && window.__resources.svcMoveout) || 'uploads/Imagenes_Web_DreamClean/05_MoveInOut_2400w.jpg', imgPlaceholder:"Empty, freshly cleaned room shot straight-on, wide-angle: gleaming bare hardwood, bright white walls, dust-free ceiling fan, soft light from an uncovered window. Symmetrical, centered vanishing point, negative space for the title. Feeling: a calm blank canvas, fully reset.", desc:'A full reset for closings, leases, and renovations — floors to ceiling fans.' }
+];
+const PROCESS_STEPS = [
+  { num:'01', title:'Get your estimate', desc:'Answer a few quick questions — get an instant price range, no call required.' },
+  { num:'02', title:'Book your visit', desc:'Pick a date, one-time or recurring. We confirm by phone or text.' },
+  { num:'03', title:'We clean, you live', desc:'Our vetted crew arrives on time and works the full checklist.' },
+  { num:'04', title:'Walk in, relax', desc:'Come home to a space that feels reset. Rebook in one tap.' }
+];
+
+const NAV_TXT = {
+  en: { navServices:'Services', navProcess:'Process', navReviews:'Reviews', navPortal:'Client Portal', navCta:'Get a Free Estimate',
+        heroEyebrow:'Orlando · Central Florida', heroLine1:'A higher', heroLine2:'standard of', heroLine3:'clean.',
+        heroSub:'Luxury residential & commercial cleaning — trusted with the keys to your home, your rental, or your office.' },
+  es: { navServices:'Servicios', navProcess:'Proceso', navReviews:'Reseñas', navPortal:'Portal de Clientes', navCta:'Cotización Gratis',
+        heroEyebrow:'Orlando · Centro de Florida', heroLine1:'Un estándar', heroLine2:'más alto de', heroLine3:'limpieza.',
+        heroSub:'Limpieza residencial y comercial de lujo — con la confianza para tener las llaves de tu casa, renta u oficina.' }
+};
+
+class Component extends DCLogic {
+  state = {
+    lang: 'en',
+    menuOpen: false,
+    viewportW: typeof window !== 'undefined' ? window.innerWidth : 1440,
+    activeService: 0,
+    estimateOpen: false,
+    sliderPos: 50,
+    processStep: 0,
+    calc: {
+      step: 1, type: 'standard', freq: 'once', bedrooms: '2', bathrooms: '2', sqft: 1500,
+      addons: { pets:false, oven:false, fridge:false, window:0, cabinets:false, baseboards:false, pressure:false, paint:false, paintSqft:1500 },
+      name: '', email: '', phone: '', errors: { name:false, email:false, phone:false },
+      sending: false, sent: false,
+      discountCode: '', discountType: null, discountValue: null, discountInvalid: false, discountCodeApplied: ''
+    }
+  };
+
+  rootRef = React.createRef();
+  navRef = React.createRef();
+  cursorRef = React.createRef();
+  heroGlowRef = React.createRef();
+  heroBadgeRef = React.createRef();
+  manifestoOuterRef = React.createRef();
+  processOuterRef = React.createRef();
+  sliderRef = React.createRef();
+  reviewsScrollRef = React.createRef();
+
+  componentDidMount() {
+    this.updateViewport = () => this.setState({ viewportW: window.innerWidth });
+    window.addEventListener('resize', this.updateViewport);
+
+    this.manifestoWords = this.manifestoOuterRef.current ? Array.from(this.manifestoOuterRef.current.querySelectorAll('[data-word]')) : [];
+    this._lastProcessStep = 0;
+    this.ticking = false;
+    this.onScroll = () => {
+      if (this.ticking) return;
+      this.ticking = true;
+      requestAnimationFrame(() => { this.handleScrollFrame(); this.ticking = false; });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.handleScrollFrame();
+
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) {
+          en.target.style.opacity = '1';
+          en.target.style.transform = 'none';
+          this.io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+    if (this.rootRef.current) {
+      this.rootRef.current.querySelectorAll('[data-reveal]').forEach((el) => this.io.observe(el));
+    }
+
+    const enableCursor = this.props.enableCustomCursor ?? true;
+    if (enableCursor && window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+      this.onMouseMove = (e) => {
+        if (this.cursorRef.current) {
+          this.cursorRef.current.style.left = e.clientX + 'px';
+          this.cursorRef.current.style.top = e.clientY + 'px';
+          this.cursorRef.current.style.opacity = '.9';
+        }
+      };
+      window.addEventListener('mousemove', this.onMouseMove);
+      this.onOver = (e) => { const t = e.target.closest('a,button'); if (t && this.cursorRef.current) this.cursorRef.current.style.transform = 'translate(-50%,-50%) scale(2.4)'; };
+      this.onOut = (e) => { const t = e.target.closest('a,button'); if (t && this.cursorRef.current) this.cursorRef.current.style.transform = 'translate(-50%,-50%) scale(1)'; };
+      document.addEventListener('mouseover', this.onOver);
+      document.addEventListener('mouseout', this.onOut);
+    }
+
+    const enableSmooth = this.props.enableSmoothScroll ?? true;
+    if (enableSmooth && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && window.Lenis) {
+      this.lenis = new window.Lenis({ duration: 1.1, smoothWheel: true });
+      const raf = (time) => { this.lenis.raf(time); this.rafId = requestAnimationFrame(raf); };
+      this.rafId = requestAnimationFrame(raf);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateViewport);
+    window.removeEventListener('scroll', this.onScroll);
+    if (this.io) this.io.disconnect();
+    if (this.onMouseMove) window.removeEventListener('mousemove', this.onMouseMove);
+    if (this.onOver) document.removeEventListener('mouseover', this.onOver);
+    if (this.onOut) document.removeEventListener('mouseout', this.onOut);
+    if (this.rafId) cancelAnimationFrame(this.rafId);
+    if (this.lenis) this.lenis.destroy();
+  }
+
+  handleScrollFrame() {
+    const y = window.scrollY;
+    const n = this.navRef.current;
+    if (n) {
+      const scrolled = y > 40;
+      n.style.padding = scrolled ? '14px clamp(20px,5vw,64px)' : '22px clamp(20px,5vw,64px)';
+      n.style.background = scrolled ? 'rgba(245,245,239,.86)' : 'transparent';
+      n.style.backdropFilter = scrolled ? 'blur(14px)' : 'none';
+      n.style.boxShadow = scrolled ? '0 1px 0 var(--border-subtle)' : 'none';
+    }
+    if (this.heroGlowRef.current) this.heroGlowRef.current.style.transform += '';
+    if (this.heroBadgeRef.current) this.heroBadgeRef.current.style.transform = 'translateY(' + (y * 0.15) + 'px)';
+
+    if (this.manifestoOuterRef.current && this.manifestoWords && this.manifestoWords.length) {
+      const rect = this.manifestoOuterRef.current.getBoundingClientRect();
+      const total = rect.height - window.innerHeight;
+      const progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, total)));
+      const n2 = this.manifestoWords.length;
+      const litCount = Math.round(progress * n2 * 1.15);
+      this.manifestoWords.forEach((w, i) => { w.style.opacity = i < litCount ? '1' : '.16'; });
+    }
+
+    if (this.processOuterRef.current) {
+      const rect = this.processOuterRef.current.getBoundingClientRect();
+      const total = rect.height - window.innerHeight;
+      const progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, total)));
+      const step = Math.min(3, Math.floor(progress * 4));
+      if (step !== this._lastProcessStep || this.state.processStep !== step) {
+        this._lastProcessStep = step;
+        this.setState({ processStep: step });
+      }
+    }
+  }
+
+  handleMagnetMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2;
+    e.currentTarget.style.transform = 'translate(' + (x * 0.16) + 'px,' + (y * 0.26) + 'px)';
+  };
+  handleMagnetLeave = (e) => { e.currentTarget.style.transform = ''; };
+
+  toggleMenu = () => this.setState((s) => ({ menuOpen: !s.menuOpen }));
+  toggleLang = () => this.setState((s) => ({ lang: s.lang === 'en' ? 'es' : 'en' }));
+  goEstimate = () => { this.setState({ estimateOpen: true, menuOpen: false }); if (this.lenis) this.lenis.stop(); document.body.style.overflow = 'hidden'; };
+  closeEstimate = () => { this.setState({ estimateOpen: false }); if (this.lenis) this.lenis.start(); document.body.style.overflow = ''; };
+  goServices = () => { window.location.hash = 'services'; };
+
+  setActiveService = (e) => this.setState({ activeService: +e.currentTarget.dataset.idx });
+
+  onSliderDown = (e) => { e.currentTarget.setPointerCapture(e.pointerId); this.dragging = true; this.updateSlider(e); };
+  onSliderMove = (e) => { if (this.dragging) this.updateSlider(e); };
+  onSliderUp = (e) => { this.dragging = false; };
+  updateSlider(e) {
+    const r = this.sliderRef.current.getBoundingClientRect();
+    const pct = Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100));
+    this.setState({ sliderPos: pct });
+  }
+
+  scrollReviewsPrev = () => { if (this.reviewsScrollRef.current) this.reviewsScrollRef.current.scrollBy({ left: -440, behavior: 'smooth' }); };
+  scrollReviewsNext = () => { if (this.reviewsScrollRef.current) this.reviewsScrollRef.current.scrollBy({ left: 440, behavior: 'smooth' }); };
+
+  setCalc(patch) { this.setState((s) => ({ calc: { ...s.calc, ...patch } })); }
+
+  selectType = (e) => {
+    const key = e.currentTarget.dataset.key;
+    const allowed = FREQ_BY_TYPE[key] || ['once'];
+    this.setState((s) => ({
+      calc: {
+        ...s.calc, type: key,
+        freq: allowed.includes(s.calc.freq) ? s.calc.freq : 'once',
+        addons: { pets:false, oven:false, fridge:false, window:0, cabinets:false, baseboards:false, pressure:false, paint:false, paintSqft:1500 }
+      }
+    }));
+  };
+  selectBed = (e) => this.setCalc({ bedrooms: e.currentTarget.dataset.key });
+  selectBath = (e) => this.setCalc({ bathrooms: e.currentTarget.dataset.key });
+  selectFreq = (e) => this.setCalc({ freq: e.currentTarget.dataset.key });
+  onSqftChange = (e) => this.setCalc({ sqft: +e.target.value });
+  onPaintSqftChange = (e) => this.setState((s) => ({ calc: { ...s.calc, addons: { ...s.calc.addons, paintSqft: +e.target.value } } }));
+  toggleAddon = (e) => {
+    const key = e.currentTarget.dataset.addon;
+    this.setState((s) => ({ calc: { ...s.calc, addons: { ...s.calc.addons, [key]: !s.calc.addons[key] } } }));
+  };
+  changeQty = (e) => {
+    const key = e.currentTarget.dataset.q, dir = +e.currentTarget.dataset.d;
+    this.setState((s) => {
+      const next = Math.max(0, Math.min(30, (s.calc.addons[key] || 0) + dir));
+      return { calc: { ...s.calc, addons: { ...s.calc.addons, [key]: next } } };
+    });
+  };
+  onNameChange = (e) => this.setCalc({ name: e.target.value });
+  onEmailChange = (e) => this.setCalc({ email: e.target.value });
+  onPhoneChange = (e) => this.setCalc({ phone: e.target.value });
+  onDiscountCodeChange = (e) => this.setCalc({ discountCode: e.target.value });
+
+  async validateDiscountCode(code) {
+    if (!code || !code.trim()) return null;
+    const KEY = 'sb_publishable_gfOVX2vGt_OozmHrQxDW0A_nlqvrdOn';
+    try {
+      const res = await fetch('https://gdnmgcqmdllviqjvyqot.supabase.co/rest/v1/rpc/validate_discount_code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': KEY, 'Authorization': 'Bearer ' + KEY },
+        body: JSON.stringify({ p_code: code.trim().toUpperCase() })
+      });
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (typeof data === 'number') return data > 0 ? { type: 'percent', value: data } : null;
+      if (data && typeof data === 'object') {
+        const type = data.type || (data.percent != null ? 'percent' : (data.flat != null ? 'flat' : null));
+        const value = data.value ?? data.percent ?? data.flat ?? null;
+        if (type && value) return { type, value };
+      }
+      return null;
+    } catch (e) { return null; }
+  }
+
+  continueStep1 = () => this.setCalc({ step: this.state.calc.type === 'commercial' ? 3 : 2 });
+  continueStep2 = () => this.setCalc({ step: 3 });
+  backToStep1 = () => this.setCalc({ step: 1 });
+  backFromStep3 = () => this.setCalc({ step: this.state.calc.type === 'commercial' ? 1 : 2 });
+
+  calcAddonsTotal(c) {
+    let t = 0;
+    if (c.type === 'standard' || c.type === 'deep') {
+      if (c.addons.oven) t += 40;
+      if (c.addons.fridge) t += 40;
+      t += c.addons.window * 3;
+      if (c.addons.cabinets) t += 50;
+      if (c.addons.baseboards) t += 60;
+    }
+    if (c.type === 'move') { if (c.addons.pressure) t += 200; if (c.addons.paint) t += c.addons.paintSqft * 2; }
+    return t;
+  }
+  calcAddonsSummary(c) {
+    const list = [];
+    if (c.type === 'standard' || c.type === 'deep') {
+      if (c.addons.pets) list.push('Pets in home');
+      if (c.addons.oven) list.push('Oven');
+      if (c.addons.fridge) list.push('Refrigerator');
+      if (c.addons.window) list.push('Interior Windows x' + c.addons.window);
+      if (c.addons.cabinets) list.push('Interior Cabinets');
+      if (c.addons.baseboards) list.push('Baseboards & Walls');
+    }
+    if (c.type === 'move') {
+      if (c.addons.pressure) list.push('Pressure Washing');
+      if (c.addons.paint) list.push('Interior Painting ~' + c.addons.paintSqft + ' sq ft');
+    }
+    return list;
+  }
+  fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+  roundTo(n, m) { return Math.round(n / m) * m; }
+  calcRange() {
+    const c = this.state.calc;
+    if (c.type === 'commercial') {
+      return { range: 'Custom quote', label: "Commercial spaces are quoted after a quick free walkthrough — we'll follow up using the info you shared.", custom: true };
+    }
+    const r = RATES[c.type], disc = DISCOUNT[c.freq] || 0;
+    let low = Math.max(c.sqft * r.low, r.min), high = Math.max(c.sqft * r.high, r.min * 1.3);
+    low *= (1 - disc); high *= (1 - disc);
+    const bathVal = parseFloat(c.bathrooms) || 1, bathExtra = Math.max(0, bathVal - 1);
+    low += bathExtra * BATH_EXTRA.low; high += bathExtra * BATH_EXTRA.high;
+    const addT = this.calcAddonsTotal(c); low += addT; high += addT;
+    low = this.roundTo(low, 5); high = this.roundTo(high, 5);
+    const freqTxt = c.freq === 'once' ? 'one-time' : ('per ' + FREQ_LABEL[c.freq].toLowerCase() + ' visit');
+    const extra = addT > 0 ? ' · incl. add-ons' : '';
+    let finalLow = low, finalHigh = high;
+    if (c.discountType === 'percent' && c.discountValue) {
+      finalLow = this.roundTo(low * (1 - c.discountValue / 100), 5);
+      finalHigh = this.roundTo(high * (1 - c.discountValue / 100), 5);
+    } else if (c.discountType === 'flat' && c.discountValue) {
+      finalLow = this.roundTo(Math.max(0, low - c.discountValue), 5);
+      finalHigh = this.roundTo(Math.max(0, high - c.discountValue), 5);
+    }
+    return {
+      range: this.fmt(finalLow) + ' – ' + this.fmt(finalHigh),
+      originalRange: this.fmt(low) + ' – ' + this.fmt(high),
+      label: 'Estimated range · ' + r.name + ' · ' + freqTxt + ' · ~' + c.sqft.toLocaleString() + ' sq ft · ' + c.bedrooms + ' bed / ' + c.bathrooms + ' bath' + extra,
+      custom: false
+    };
+  }
+
+  validateAndSubmit = async () => {
+    const c = this.state.calc;
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const validPhone = (v) => (v.match(/\d/g) || []).length >= 7;
+    const errors = { name: !c.name.trim(), email: !emailRe.test(c.email.trim()), phone: !validPhone(c.phone) };
+    if (errors.name || errors.email || errors.phone) { this.setCalc({ errors }); return; }
+    this.setCalc({ errors, sending: true });
+    const disc = await this.validateDiscountCode(c.discountCode);
+    this.setCalc({
+      discountType: disc ? disc.type : null, discountValue: disc ? disc.value : null,
+      discountInvalid: !!(c.discountCode && c.discountCode.trim() && !disc),
+      discountCodeApplied: disc ? c.discountCode.trim().toUpperCase() : ''
+    });
+    const result = this.calcRange();
+    const payload = {
+      to: 'info@dreamcleanbydc.com', subject: 'New Dream Clean estimate request — ' + c.name,
+      name: c.name, email: c.email, phone: c.phone, cleaningType: c.type,
+      sqft: c.type === 'commercial' ? null : c.sqft, bedrooms: c.type === 'commercial' ? null : c.bedrooms,
+      bathrooms: c.type === 'commercial' ? null : c.bathrooms, frequency: c.type === 'commercial' ? null : c.freq,
+      addons: this.calcAddonsSummary(c), estimate: result.range,
+      source: 'Dream Clean marketing site — free estimate tool', submittedAt: new Date().toISOString()
+    };
+    fetch('https://formspree.io/f/mnjkjgpo', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) })
+      .then((r) => ({ ok: r.ok })).catch(() => ({ ok: false }))
+      .then((res) => { this.setCalc({ sending: false, sent: res.ok, step: 4 }); });
+  };
+
+  renderVals() {
+    const s = this.state, c = s.calc;
+    const w = s.viewportW || 1440;
+    const isMobile = w < 640, isTablet = w < 980;
+    const result = this.calcRange();
+    const isCommercial = c.type === 'commercial';
+
+    const services = SERVICE_DEFS.map((svc) => {
+      const active = svc.idx === s.activeService;
+      return { ...svc, grow: active ? 3.4 : 1, descOpacity: active ? 1 : 0, descMaxHeight: active ? '120px' : '0px' };
+    });
+    const proc = PROCESS_STEPS[s.processStep];
+    const processDots = PROCESS_STEPS.map((_, i) => ({ width: i === s.processStep ? '32px' : '18px', bg: i <= s.processStep ? 'var(--dc-gold)' : 'rgba(245,245,239,.3)' }));
+
+    const typeOptions = [
+      { key: 'standard', label: 'Standard' }, { key: 'deep', label: 'Deep clean' },
+      { key: 'move', label: 'Move-in / out' }, { key: 'commercial', label: 'Commercial' }
+    ].map((o) => ({ ...o, style: o.key === c.type ? SEL_STYLE : UNSEL_STYLE }));
+    const bedOptions = ['Studio', '1', '2', '3', '4', '5+'].map((b) => ({ key: b, label: b, style: b === c.bedrooms ? SEL_STYLE : UNSEL_STYLE }));
+    const bathOptions = ['1', '1.5', '2', '2.5', '3+'].map((b) => ({ key: b, label: b, style: b === c.bathrooms ? SEL_STYLE : UNSEL_STYLE }));
+    const freqOptions = (FREQ_BY_TYPE[c.type] || ['once']).map((f) => ({ key: f, label: FREQ_LABEL[f], style: f === c.freq ? SEL_STYLE : UNSEL_STYLE }));
+    const dots = [1, 2, 3, 4].map((n) => ({ n, style: n <= c.step ? 'background:var(--dc-gold)' : 'background:var(--border-subtle)' }));
+
+    return {
+      t: NAV_TXT[s.lang], toggleLang: this.toggleLang,
+      enActiveStyle: s.lang === 'en' ? 'color:var(--dc-gold)' : 'color:var(--text-muted)',
+      esActiveStyle: s.lang === 'es' ? 'color:var(--dc-gold)' : 'color:var(--text-muted)',
+      rootRef: this.rootRef, navRef: this.navRef, cursorRef: this.cursorRef,
+      heroGlowRef: this.heroGlowRef, heroBadgeRef: this.heroBadgeRef,
+      manifestoOuterRef: this.manifestoOuterRef, processOuterRef: this.processOuterRef,
+      sliderRef: this.sliderRef, reviewsScrollRef: this.reviewsScrollRef,
+      handleMagnetMove: this.handleMagnetMove, handleMagnetLeave: this.handleMagnetLeave,
+      toggleMenu: this.toggleMenu, mobileMenuOpen: s.menuOpen && isTablet,
+      goEstimate: this.goEstimate, closeEstimate: this.closeEstimate, estimateOpen: s.estimateOpen, goServices: this.goServices,
+      navLinksDisplay: isTablet ? 'none' : 'flex', ctaDisplay: isTablet ? 'none' : 'inline-flex', burgerDisplay: isTablet ? 'flex' : 'none',
+      badgeDisplay: isMobile ? 'none' : 'block',
+
+      services, setActiveService: this.setActiveService,
+      sliderPos: s.sliderPos, beforeClip: 'inset(0 ' + (100 - s.sliderPos) + '% 0 0)',
+      onSliderDown: this.onSliderDown, onSliderMove: this.onSliderMove, onSliderUp: this.onSliderUp,
+
+      processStepNum: proc.num, processStepTitle: proc.title, processStepDesc: proc.desc,
+      processStepLabel: 'Step ' + (s.processStep + 1) + ' of 4', processDots,
+
+      scrollReviewsPrev: this.scrollReviewsPrev, scrollReviewsNext: this.scrollReviewsNext,
+
+      dots, typeOptions, bedOptions, bathOptions, freqOptions,
+      step1: c.step === 1, step2: c.step === 2, step3: c.step === 3, step4: c.step === 4,
+      isCommercial, notCommercial: !isCommercial,
+      sqft: c.sqft, sqftOut: c.sqft.toLocaleString() + (c.sqft >= 6000 ? '+' : ''),
+      selectType: this.selectType, selectBed: this.selectBed, selectBath: this.selectBath, selectFreq: this.selectFreq,
+      onSqftChange: this.onSqftChange, onPaintSqftChange: this.onPaintSqftChange,
+      continueStep1: this.continueStep1, continueStep2: this.continueStep2, backToStep1: this.backToStep1, backFromStep3: this.backFromStep3,
+
+      isStandardOrDeep: c.type === 'standard' || c.type === 'deep', isMove: c.type === 'move',
+      toggleAddon: this.toggleAddon, changeQty: this.changeQty,
+      petsOn: c.addons.pets, petsCheckStyle: c.addons.pets ? CHECK_ON : '',
+      ovenOn: c.addons.oven, ovenCheckStyle: c.addons.oven ? CHECK_ON : '',
+      fridgeOn: c.addons.fridge, fridgeCheckStyle: c.addons.fridge ? CHECK_ON : '',
+      cabinetsOn: c.addons.cabinets, cabinetsCheckStyle: c.addons.cabinets ? CHECK_ON : '',
+      baseboardsOn: c.addons.baseboards, baseboardsCheckStyle: c.addons.baseboards ? CHECK_ON : '',
+      pressureOn: c.addons.pressure, pressureCheckStyle: c.addons.pressure ? CHECK_ON : '',
+      paintOn: c.addons.paint, paintCheckStyle: c.addons.paint ? CHECK_ON : '',
+      windowQty: c.addons.window,
+      showPaintDetail: c.addons.paint, paintSqft: c.addons.paintSqft,
+      paintSqftOut: c.addons.paintSqft.toLocaleString() + (c.addons.paintSqft >= 8000 ? '+' : ''),
+
+      name: c.name, email: c.email, phone: c.phone,
+      onNameChange: this.onNameChange, onEmailChange: this.onEmailChange, onPhoneChange: this.onPhoneChange,
+      nameErr: c.errors.name, emailErr: c.errors.email, phoneErr: c.errors.phone,
+      nameInputStyle: 'border:1px solid ' + (c.errors.name ? 'var(--status-danger)' : 'var(--border-subtle)'),
+      emailInputStyle: 'border:1px solid ' + (c.errors.email ? 'var(--status-danger)' : 'var(--border-subtle)'),
+      phoneInputStyle: 'border:1px solid ' + (c.errors.phone ? 'var(--status-danger)' : 'var(--border-subtle)'),
+      validateAndSubmit: this.validateAndSubmit,
+      sendingStyle: c.sending ? 'opacity:.55' : '', submitLabel: c.sending ? 'Sending…' : 'See my estimate',
+      sentNote: c.sent ? "We've received your info and will follow up shortly." : '',
+
+      resultRange: result.range, resultLabel: result.label, originalRange: result.originalRange,
+      resultFontSize: result.custom ? '19px' : '32px', resultColor: result.custom ? 'var(--dc-espresso)' : '#A5792A',
+      discountCodeInput: c.discountCode,
+      onDiscountCodeChange: this.onDiscountCodeChange,
+      showDiscountRow: !result.custom && !!c.discountType,
+      showDiscountInvalid: !result.custom && c.discountInvalid,
+      discountBadgeText: c.discountType === 'percent' ? (c.discountValue + '% OFF · ' + c.discountCodeApplied + ' APPLIED')
+        : c.discountType === 'flat' ? ('$' + c.discountValue + ' OFF · ' + c.discountCodeApplied + ' APPLIED') : '',
+
+      showClientPortalLink: this.props.showClientPortalLink ?? true
+    };
+  }
+}
+
+</script>
+</body>
+</html>

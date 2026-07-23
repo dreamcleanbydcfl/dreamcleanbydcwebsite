@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap');
+:root{
+  /* Dream Clean's Brand Guidelines name Forum + Montserrat as the type system.
+     The company's own shipped product (dashboard, client portal, digital estimate
+     form — dreamcleanbydc.com) instead ships Playfair Display + Jost. We follow the
+     shipped pairing here so this design system, the web app, and any new surface
+     look like one product — see readme.md "Typography" for the full note. */
+  --font-display:'Playfair Display',Georgia,'Times New Roman',serif;
+  --font-body:'Jost','Helvetica Neue',Arial,sans-serif;
+
+  --text-display-xl:clamp(2.75rem,5vw + 1rem,5.5rem);
+  --text-display-lg:clamp(2.25rem,3.4vw + 1rem,3.75rem);
+  --text-display-md:clamp(1.75rem,2vw + 1rem,2.5rem);
+  --text-display-sm:1.5rem;
+  --text-lead:1.25rem;
+  --text-body-lg:1.0625rem;
+  --text-body:0.95rem;
+  --text-small:0.8125rem;
+  --text-caption:0.6875rem;
+
+  --tracking-caps:0.14em;
+  --tracking-wide:0.03em;
+  --leading-tight:1.15;
+  --leading-snug:1.35;
+  --leading-normal:1.6;
+}

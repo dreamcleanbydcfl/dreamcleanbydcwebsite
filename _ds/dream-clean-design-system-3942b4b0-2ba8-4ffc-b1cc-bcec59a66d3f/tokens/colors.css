@@ -1,0 +1,48 @@
+:root{
+  /* Base palette — Dream Clean Brand Guidelines v1.0 */
+  --dc-crema:#F5F5EF;
+  --dc-arena:#F1E9DF;
+  --dc-sage:#8E9C82;
+  --dc-camel:#B08B6D;
+  --dc-gold:#B68911;
+  --dc-gold-light:#C9A227;
+  --dc-espresso:#3A332A;
+  --dc-espresso-soft:#726A5F;
+  --dc-espresso-faint:#A79E90;
+  --dc-white:#FFFFFF;
+
+  /* Semantic surfaces */
+  --surface-canvas:var(--dc-crema);
+  --surface-section:var(--dc-arena);
+  --surface-card:var(--dc-white);
+  --surface-dark:var(--dc-espresso);
+  --surface-gold-tint:#F4E9D2;
+  --surface-sage-tint:#E7ECDF;
+
+  /* Semantic text */
+  --text-body:var(--dc-espresso);
+  --text-muted:var(--dc-espresso-soft);
+  --text-faint:var(--dc-espresso-faint);
+  --text-on-dark:var(--dc-crema);
+  --text-on-dark-muted:#B7AE9C;
+  --text-accent:var(--dc-gold);
+
+  /* Accents */
+  --accent-gold:var(--dc-gold);
+  --accent-sage:var(--dc-sage);
+  --accent-camel:var(--dc-camel);
+
+  /* Borders */
+  --border-subtle:#E3DDCE;
+  --border-on-dark:rgba(239,233,221,.16);
+
+  /* Status (aligned to brand accents, not stock red/green) */
+  --status-success:#5C7A4C;
+  --status-success-bg:#E4EBDD;
+  --status-warning:var(--dc-gold);
+  --status-warning-bg:var(--surface-gold-tint);
+  --status-danger:#AE4A34;
+  --status-danger-bg:#F3E1DA;
+  --status-info:#4A6A8A;
+  --status-info-bg:#DEE7EE;
+}

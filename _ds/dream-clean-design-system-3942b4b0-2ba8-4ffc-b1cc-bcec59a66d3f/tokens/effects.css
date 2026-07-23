@@ -1,0 +1,12 @@
+:root{
+  --shadow-sm:0 1px 2px rgba(58,51,44,.06);
+  --shadow-md:0 1px 2px rgba(58,51,44,.06),0 6px 20px rgba(58,51,44,.06);
+  --shadow-lg:0 10px 30px rgba(58,51,44,.14),0 2px 8px rgba(58,51,44,.08);
+  --shadow-dark-lg:0 30px 80px rgba(0,0,0,.4);
+
+  --ease-standard:cubic-bezier(.22,.61,.36,1); /* @kind other */
+  --ease-out-soft:cubic-bezier(.16,1,.3,1); /* @kind other */
+  --duration-fast:150ms; /* @kind other */
+  --duration-normal:280ms; /* @kind other */
+  --duration-slow:600ms; /* @kind other */
+}
