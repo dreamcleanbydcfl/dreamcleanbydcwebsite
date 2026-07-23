@@ -729,8 +729,8 @@ class Component extends DCLogic {
       const data = await res.json();
       if (typeof data === 'number') return data > 0 ? { type: 'percent', value: data } : null;
       if (data && typeof data === 'object') {
-        const type = data.type || (data.percent != null ? 'percent' : (data.flat != null ? 'flat' : null));
-        const value = data.value ?? data.percent ?? data.flat ?? null;
+        const type = data.discount_type || (data.percent_off != null ? 'percent' : (data.amount_off != null ? 'flat' : null));
+        const value = data.percent_off ?? data.amount_off ?? null;
         if (type && value) return { type, value };
       }
       return null;
@@ -816,15 +816,27 @@ class Component extends DCLogic {
       discountCodeApplied: disc ? c.discountCode.trim().toUpperCase() : ''
     });
     const result = this.calcRange();
+    const SUPABASE_URL = 'https://gdnmgcqmdllviqjvyqot.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_gfOVX2vGt_OozmHrQxDW0A_nlqvrdOn';
     const payload = {
-      to: 'info@dreamcleanbydc.com', subject: 'New Dream Clean estimate request — ' + c.name,
-      name: c.name, email: c.email, phone: c.phone, cleaningType: c.type,
-      sqft: c.type === 'commercial' ? null : c.sqft, bedrooms: c.type === 'commercial' ? null : c.bedrooms,
-      bathrooms: c.type === 'commercial' ? null : c.bathrooms, frequency: c.type === 'commercial' ? null : c.freq,
-      addons: this.calcAddonsSummary(c), estimate: result.range,
-      source: 'Dream Clean marketing site — free estimate tool', submittedAt: new Date().toISOString()
+      p_full_name: c.name, p_phone: c.phone, p_email: c.email,
+      p_cleaning_type: c.type,
+      p_sqft: c.type === 'commercial' ? null : c.sqft,
+      p_bedrooms: c.type === 'commercial' ? null : c.bedrooms,
+      p_bathrooms: c.type === 'commercial' ? null : c.bathrooms,
+      p_frequency: c.type === 'commercial' ? null : c.freq,
+      p_addons: this.calcAddonsSummary(c).join(', '),
+      p_estimated_range: result.range,
+      p_notes: null, p_sms_consent: false,
+      p_discount_code: disc ? c.discountCode.trim().toUpperCase() : null,
+      p_discount_percent: disc && disc.type === 'percent' ? disc.value : null,
+      p_preferred_date: null, p_preferred_time: null
     };
-    fetch('https://formspree.io/f/mnjkjgpo', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) })
+    fetch(SUPABASE_URL + '/rest/v1/rpc/submit_lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY },
+      body: JSON.stringify(payload)
+    })
       .then((r) => ({ ok: r.ok })).catch(() => ({ ok: false }))
       .then((res) => { this.setCalc({ sending: false, sent: res.ok, step: 4 }); });
   };
