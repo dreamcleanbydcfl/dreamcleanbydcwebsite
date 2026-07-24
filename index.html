@@ -413,6 +413,19 @@
           <input type="tel" placeholder="(407) 555-0123" autoComplete="tel" value="{{ phone }}" onChange="{{ onPhoneChange }}" style="border-radius:6px;padding:11px 12px;font-size:14px;font-family:var(--font-body);color:var(--dc-espresso);background:var(--surface-canvas);outline:none;{{ phoneInputStyle }}">
           <sc-if value="{{ phoneErr }}" hint-placeholder-val="{{ false }}"><div style="font-size:10px;color:var(--status-danger);margin-top:2px">Please enter a valid phone number.</div></sc-if>
         </div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px;position:relative">
+          <label style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted)">Service address</label>
+          <input type="text" placeholder="Start typing your address…" autoComplete="off" value="{{ address }}" onChange="{{ onAddressChange }}" onFocus="{{ onAddressFocus }}" onBlur="{{ onAddressBlur }}" style="border-radius:6px;padding:11px 12px;font-size:14px;font-family:var(--font-body);color:var(--dc-espresso);background:var(--surface-canvas);outline:none;{{ addressInputStyle }}">
+          <div style="font-size:10px;color:var(--text-muted)">So we can confirm your home's square footage.</div>
+          <sc-if value="{{ addressErr }}" hint-placeholder-val="{{ false }}"><div style="font-size:10px;color:var(--status-danger);margin-top:2px">Please enter your service address.</div></sc-if>
+          <sc-if value="{{ showAddressSuggestions }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:100%;left:0;right:0;margin-top:2px;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:8px;box-shadow:var(--shadow-lg);z-index:20;max-height:220px;overflow-y:auto">
+            <sc-for list="{{ addressSuggestions }}" as="s" hint-placeholder-count="3">
+              <div data-idx="{{ s.idx }}" onClick="{{ selectAddressSuggestion }}" style="padding:10px 12px;font-size:12.5px;color:var(--dc-espresso);cursor:pointer;border-bottom:1px solid var(--border-subtle)" style-hover="background:var(--surface-section)">{{ s.label }}</div>
+            </sc-for>
+          </div>
+          </sc-if>
+        </div>
         <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px">
           <label style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-muted)">Discount code (optional)</label>
           <input type="text" placeholder="e.g. ATRIUM15" autoComplete="off" value="{{ discountCodeInput }}" onChange="{{ onDiscountCodeChange }}" style="border-radius:6px;padding:11px 12px;font-size:14px;font-family:var(--font-body);color:var(--dc-espresso);background:var(--surface-canvas);outline:none;border:1px solid var(--border-subtle);text-transform:uppercase">
@@ -553,8 +566,9 @@ class Component extends DCLogic {
     calc: {
       step: 1, type: 'standard', freq: 'once', bedrooms: '2', bathrooms: '2', sqft: 1500,
       addons: { pets:false, oven:false, fridge:false, window:0, cabinets:false, baseboards:false, pressure:false, paint:false, paintSqft:1500 },
-      name: '', email: '', phone: '', errors: { name:false, email:false, phone:false },
+      name: '', email: '', phone: '', address: '', errors: { name:false, email:false, phone:false, address:false },
       sending: false, sent: false,
+      addressSuggestions: [], addressOpen: false,
       discountCode: '', discountType: null, discountValue: null, discountInvalid: false, discountCodeApplied: ''
     }
   };
@@ -728,6 +742,31 @@ class Component extends DCLogic {
   onPhoneChange = (e) => this.setCalc({ phone: e.target.value });
   onDiscountCodeChange = (e) => this.setCalc({ discountCode: e.target.value });
 
+  onAddressChange = (e) => {
+    const v = e.target.value;
+    this.setCalc({ address: v, addressOpen: true });
+    clearTimeout(this._addrTimer);
+    if (v.trim().length < 5) { this.setCalc({ addressSuggestions: [] }); return; }
+    this._addrTimer = setTimeout(() => this.searchAddress(v), 450);
+  };
+  async searchAddress(query) {
+    const reqId = (this._addrReqId = (this._addrReqId || 0) + 1);
+    try {
+      const res = await fetch('https://nominatim.openstreetmap.org/search?format=json&addressdetails=0&limit=5&countrycodes=us&q=' + encodeURIComponent(query));
+      const data = await res.json();
+      if (reqId !== this._addrReqId) return;
+      this.setCalc({ addressSuggestions: Array.isArray(data) ? data : [] });
+    } catch (e) { /* silently ignore — user can still type the address manually */ }
+  }
+  selectAddressSuggestion = (e) => {
+    const idx = +e.currentTarget.dataset.idx;
+    const item = this.state.calc.addressSuggestions[idx];
+    if (!item) return;
+    this.setCalc({ address: item.display_name, addressSuggestions: [], addressOpen: false });
+  };
+  onAddressBlur = () => { setTimeout(() => this.setCalc({ addressOpen: false }), 150); };
+  onAddressFocus = () => { if (this.state.calc.addressSuggestions.length) this.setCalc({ addressOpen: true }); };
+
   async validateDiscountCode(code) {
     if (!code || !code.trim()) return null;
     const KEY = 'sb_publishable_gfOVX2vGt_OozmHrQxDW0A_nlqvrdOn';
@@ -818,8 +857,8 @@ class Component extends DCLogic {
     const c = this.state.calc;
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const validPhone = (v) => (v.match(/\d/g) || []).length >= 7;
-    const errors = { name: !c.name.trim(), email: !emailRe.test(c.email.trim()), phone: !validPhone(c.phone) };
-    if (errors.name || errors.email || errors.phone) { this.setCalc({ errors }); return; }
+    const errors = { name: !c.name.trim(), email: !emailRe.test(c.email.trim()), phone: !validPhone(c.phone), address: !c.address.trim() };
+    if (errors.name || errors.email || errors.phone || errors.address) { this.setCalc({ errors }); return; }
     this.setCalc({ errors, sending: true });
     const disc = await this.validateDiscountCode(c.discountCode);
     this.setCalc({
@@ -839,7 +878,7 @@ class Component extends DCLogic {
       p_frequency: c.type === 'commercial' ? null : c.freq,
       p_addons: this.calcAddonsSummary(c).join(', '),
       p_estimated_range: result.range,
-      p_notes: null, p_sms_consent: false,
+      p_notes: 'Service address: ' + c.address.trim(), p_sms_consent: false,
       p_discount_code: disc ? c.discountCode.trim().toUpperCase() : null,
       p_discount_percent: disc && disc.type === 'percent' ? disc.value : null,
       p_preferred_date: null, p_preferred_time: null
@@ -924,12 +963,17 @@ class Component extends DCLogic {
       showPaintDetail: c.addons.paint, paintSqft: c.addons.paintSqft,
       paintSqftOut: c.addons.paintSqft.toLocaleString() + (c.addons.paintSqft >= 8000 ? '+' : ''),
 
-      name: c.name, email: c.email, phone: c.phone,
+      name: c.name, email: c.email, phone: c.phone, address: c.address,
       onNameChange: this.onNameChange, onEmailChange: this.onEmailChange, onPhoneChange: this.onPhoneChange,
-      nameErr: c.errors.name, emailErr: c.errors.email, phoneErr: c.errors.phone,
+      onAddressChange: this.onAddressChange, onAddressBlur: this.onAddressBlur, onAddressFocus: this.onAddressFocus,
+      selectAddressSuggestion: this.selectAddressSuggestion,
+      addressSuggestions: c.addressSuggestions.map((it, idx) => ({ idx, label: it.display_name })),
+      showAddressSuggestions: c.addressOpen && c.addressSuggestions.length > 0,
+      nameErr: c.errors.name, emailErr: c.errors.email, phoneErr: c.errors.phone, addressErr: c.errors.address,
       nameInputStyle: 'border:1px solid ' + (c.errors.name ? 'var(--status-danger)' : 'var(--border-subtle)'),
       emailInputStyle: 'border:1px solid ' + (c.errors.email ? 'var(--status-danger)' : 'var(--border-subtle)'),
       phoneInputStyle: 'border:1px solid ' + (c.errors.phone ? 'var(--status-danger)' : 'var(--border-subtle)'),
+      addressInputStyle: 'border:1px solid ' + (c.errors.address ? 'var(--status-danger)' : 'var(--border-subtle)'),
       validateAndSubmit: this.validateAndSubmit,
       sendingStyle: c.sending ? 'opacity:.55' : '', submitLabel: c.sending ? 'Sending…' : 'See my estimate',
       sentNote: c.sent ? "We've received your info and will follow up shortly." : '',
