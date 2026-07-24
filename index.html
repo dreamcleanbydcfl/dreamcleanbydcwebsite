@@ -158,11 +158,16 @@
     <h2 data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);font-family:var(--font-display);font-size:var(--text-display-lg);margin:0 0 18px;font-weight:600">Every visit ends the same way</h2>
     <p data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);color:var(--text-muted);font-size:var(--text-body-lg);margin:0">Spotless surfaces, straightened rooms, and a space that feels reset — not just wiped down. Drag the divider to see the difference.</p>
   </div>
+  <div style="display:flex;justify-content:center;gap:10px;margin-bottom:24px;flex-wrap:wrap">
+    <sc-for list="{{ showcaseTabs }}" as="tab" hint-placeholder-count="2">
+      <div data-key="{{ tab.key }}" onClick="{{ selectShowcase }}" style="border:1px solid var(--border-subtle);border-radius:100px;padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;{{ tab.style }}">{{ tab.label }}</div>
+    </sc-for>
+  </div>
   <div data-reveal="scale" ref="{{ sliderRef }}" onPointerDown="{{ onSliderDown }}" onPointerMove="{{ onSliderMove }}" onPointerUp="{{ onSliderUp }}" style="opacity:0;transform:scale(.96);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);position:relative;max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);cursor:ew-resize;user-select:none">
     <div style="position:absolute;inset:-14px 14px auto -14px;top:auto;bottom:-14px;height:60%;border:1px solid var(--dc-gold);border-radius:20px;opacity:.3;transform:rotate(-1.2deg);pointer-events:none;z-index:-1"></div>
-    <image-slot id="showcase-after" src="assets/before-after/after-oven.jpg" placeholder="AFTER — same room, same camera angle as Before: surfaces cleared and gleaming, cushions plumped, warm golden-hour light, styled like a magazine reveal. True-to-life warm grade, never cold. Feeling: calm, restored, editorial." shape="rect" style="position:absolute;inset:0;color:rgba(58,51,44,.22)"></image-slot>
+    <image-slot id="showcase-after" src="{{ showcaseAfterSrc }}" placeholder="AFTER — same room, same camera angle as Before: surfaces cleared and gleaming, cushions plumped, warm golden-hour light, styled like a magazine reveal. True-to-life warm grade, never cold. Feeling: calm, restored, editorial." shape="rect" style="position:absolute;inset:0;color:rgba(58,51,44,.22)"></image-slot>
     <div style="position:absolute;inset:0;overflow:hidden;clip-path:{{ beforeClip }}">
-      <image-slot id="showcase-before" src="assets/before-after/before-oven.jpg" placeholder="BEFORE — same room, same angle: naturally lived-in — folded laundry, a few dishes, daily clutter — but warmly and evenly lit, never staged as grim or dirty. Feeling: authentically in-use, ready for its reset." shape="rect" style="position:absolute;inset:0;color:rgba(58,51,44,.22)"></image-slot>
+      <image-slot id="showcase-before" src="{{ showcaseBeforeSrc }}" placeholder="BEFORE — same room, same angle: naturally lived-in — folded laundry, a few dishes, daily clutter — but warmly and evenly lit, never staged as grim or dirty. Feeling: authentically in-use, ready for its reset." shape="rect" style="position:absolute;inset:0;color:rgba(58,51,44,.22)"></image-slot>
     </div>
     <img src="assets/logos/submark_gold_on_espresso.png" alt="" style="position:absolute;bottom:14px;right:14px;width:34px;opacity:.85;pointer-events:none;z-index:2">
     <div style="position:absolute;top:16px;left:16px;padding:6px 14px;border-radius:100px;background:rgba(58,51,44,.55);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(4px)">Before</div>
@@ -507,6 +512,11 @@ const FREQ_BY_TYPE = { standard:["once","weekly","biweekly","monthly"], deep:["o
 const BATH_EXTRA = { low: 8, high: 12 };
 const SEL_STYLE = 'background:var(--dc-gold);color:#fff;border-color:var(--dc-gold)';
 const UNSEL_STYLE = 'background:var(--surface-canvas);color:var(--dc-espresso);border-color:var(--border-subtle)';
+
+const SHOWCASE_EXAMPLES = [
+  { key: 'oven', label: 'Oven', before: 'assets/before-after/before-oven.jpg', after: 'assets/before-after/after-oven.jpg' },
+  { key: 'fridge', label: 'Refrigerator', before: 'assets/before-after/before-fridge.jpg', after: 'assets/before-after/after-fridge.jpg' }
+];
 const CHECK_ON = 'background:var(--dc-gold);border-color:var(--dc-gold)';
 const SERVICE_DEFS = [
   { idx:0, num:'01', label:'Residential', imgId:'service-residential', imgSrc:(window.__resources && window.__resources.svcResidential) || 'uploads/Imagenes_Web_DreamClean/02_Residential_2400w.jpg', imgPlaceholder:"Large-format close-up: a perfectly made bed, crisp white linens, folded camel-toned throw at the foot. Soft raking window light, shallow depth of field, true-to-life warm tones. Tight crop, negative space at top for the title. Feeling: boutique-hotel warmth, just turned down.", desc:"Recurring home cleaning, deep cleans, and move-in/move-out — the kind of finish that looks magazine-ready." },
@@ -538,6 +548,7 @@ class Component extends DCLogic {
     activeService: 0,
     estimateOpen: false,
     sliderPos: 50,
+    showcaseKey: 'oven',
     processStep: 0,
     calc: {
       step: 1, type: 'standard', freq: 'once', bedrooms: '2', bathrooms: '2', sqft: 1500,
@@ -673,6 +684,7 @@ class Component extends DCLogic {
   onSliderDown = (e) => { e.currentTarget.setPointerCapture(e.pointerId); this.dragging = true; this.updateSlider(e); };
   onSliderMove = (e) => { if (this.dragging) this.updateSlider(e); };
   onSliderUp = (e) => { this.dragging = false; };
+  selectShowcase = (e) => { const key = e.currentTarget.dataset.key; this.setState({ showcaseKey: key, sliderPos: 50 }); };
   updateSlider(e) {
     const r = this.sliderRef.current.getBoundingClientRect();
     const pct = Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100));
@@ -863,6 +875,8 @@ class Component extends DCLogic {
     const bathOptions = ['1', '1.5', '2', '2.5', '3+'].map((b) => ({ key: b, label: b, style: b === c.bathrooms ? SEL_STYLE : UNSEL_STYLE }));
     const freqOptions = (FREQ_BY_TYPE[c.type] || ['once']).map((f) => ({ key: f, label: FREQ_LABEL[f], style: f === c.freq ? SEL_STYLE : UNSEL_STYLE }));
     const dots = [1, 2, 3, 4].map((n) => ({ n, style: n <= c.step ? 'background:var(--dc-gold)' : 'background:var(--border-subtle)' }));
+    const showcase = SHOWCASE_EXAMPLES.find((x) => x.key === s.showcaseKey) || SHOWCASE_EXAMPLES[0];
+    const showcaseTabs = SHOWCASE_EXAMPLES.map((x) => ({ key: x.key, label: x.label, style: x.key === s.showcaseKey ? SEL_STYLE : UNSEL_STYLE }));
 
     return {
       t: NAV_TXT[s.lang], toggleLang: this.toggleLang,
@@ -881,6 +895,8 @@ class Component extends DCLogic {
       services, setActiveService: this.setActiveService,
       sliderPos: s.sliderPos, beforeClip: 'inset(0 ' + (100 - s.sliderPos) + '% 0 0)',
       onSliderDown: this.onSliderDown, onSliderMove: this.onSliderMove, onSliderUp: this.onSliderUp,
+      showcaseBeforeSrc: showcase.before, showcaseAfterSrc: showcase.after,
+      showcaseTabs, selectShowcase: this.selectShowcase,
 
       processStepNum: proc.num, processStepTitle: proc.title, processStepDesc: proc.desc,
       processStepLabel: 'Step ' + (s.processStep + 1) + ' of 4', processDots,
