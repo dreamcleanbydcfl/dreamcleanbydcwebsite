@@ -146,7 +146,7 @@
           <h3 style="font-family:var(--font-display);font-size:clamp(18px,1.8vw,26px);margin:0 0 8px;font-weight:600;white-space:nowrap">{{ svc.label }}</h3>
           <div style="overflow:hidden;transition:max-height .5s ease,opacity .4s ease;max-height:{{ svc.descMaxHeight }};opacity:{{ svc.descOpacity }}">
             <p style="font-size:13.5px;line-height:1.5;margin:0 0 8px">{{ svc.desc }}</p>
-            <a data-tier="{{ svc.exploreTier }}" onClick="{{ selectTierAndScroll }}" style="font-size:12px;font-weight:600;color:var(--dc-gold-light);cursor:pointer;text-decoration:underline;text-underline-offset:3px">Explore {{ svc.label }} →</a>
+            <a href="{{ svc.exploreHref }}" target="_blank" rel="noopener" style="font-size:12px;font-weight:600;color:var(--dc-gold-light);text-decoration:underline;text-underline-offset:3px">Explore {{ svc.label }} ↗</a>
           </div>
         </div>
       </div>
@@ -180,62 +180,7 @@
     </div>
   </div>
   <div style="text-align:center;margin-top:28px">
-    <a href="#whats-included" style="font-size:13px;font-weight:600;color:var(--dc-gold);text-decoration:underline;text-underline-offset:3px">See exactly what's included in every clean →</a>
-  </div>
-</section>
-
-<!-- ===== WHAT'S INCLUDED — full checklist by service tier ===== -->
-<section id="whats-included" style="max-width:var(--container-max);margin:0 auto;padding:20px 24px 160px">
-  <div style="max-width:var(--container-narrow);margin:0 auto;text-align:center;padding:0 24px 56px">
-    <div data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dc-gold);font-weight:500;margin-bottom:14px">What's included</div>
-    <h2 data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);font-family:var(--font-display);font-size:var(--text-display-lg);margin:0 0 18px;font-weight:600">A clear guide to every service</h2>
-    <p data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);color:var(--text-muted);font-size:var(--text-body-lg);margin:0">Exactly what's covered, tier by tier — so you always know what to expect.</p>
-  </div>
-  <div style="display:flex;justify-content:center;gap:10px;margin-bottom:32px;flex-wrap:wrap">
-    <sc-for list="{{ tierTabs }}" as="tier" hint-placeholder-count="4">
-      <div data-tier="{{ tier.tier }}" onClick="{{ selectTier }}" style="border:1px solid var(--border-subtle);border-radius:100px;padding:9px 18px;font-size:12.5px;font-weight:600;cursor:pointer;transition:.15s;{{ tier.style }}">{{ tier.label }}</div>
-    </sc-for>
-  </div>
-  <div style="max-width:960px;margin:0 auto;background:var(--surface-canvas);border:1px solid var(--border-subtle);border-radius:24px;padding:clamp(24px,4vw,48px);box-shadow:var(--shadow-lg)">
-    <p style="margin:0 0 28px;text-align:center;font-style:italic;color:var(--text-muted);font-size:13.5px">{{ checklistNote }}</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:clamp(24px,4vw,36px)">
-      <div>
-        <div style="font-family:var(--font-display);font-size:14.5px;font-weight:600;color:var(--dc-gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em">{{ cat1Name }}</div>
-        <sc-for list="{{ cat1Items }}" as="item" hint-placeholder-count="4">
-          <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;font-size:13.5px;line-height:1.45;color:var(--text-muted)"><span style="color:var(--dc-gold);flex-shrink:0">✓</span><span>{{ item.text }}</span></div>
-        </sc-for>
-      </div>
-      <div>
-        <div style="font-family:var(--font-display);font-size:14.5px;font-weight:600;color:var(--dc-gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em">{{ cat2Name }}</div>
-        <sc-for list="{{ cat2Items }}" as="item" hint-placeholder-count="4">
-          <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;font-size:13.5px;line-height:1.45;color:var(--text-muted)"><span style="color:var(--dc-gold);flex-shrink:0">✓</span><span>{{ item.text }}</span></div>
-        </sc-for>
-      </div>
-      <sc-if value="{{ cat3Name }}" hint-placeholder-val="{{ true }}">
-      <div>
-        <div style="font-family:var(--font-display);font-size:14.5px;font-weight:600;color:var(--dc-gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em">{{ cat3Name }}</div>
-        <sc-for list="{{ cat3Items }}" as="item" hint-placeholder-count="4">
-          <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;font-size:13.5px;line-height:1.45;color:var(--text-muted)"><span style="color:var(--dc-gold);flex-shrink:0">✓</span><span>{{ item.text }}</span></div>
-        </sc-for>
-      </div>
-      </sc-if>
-      <sc-if value="{{ cat4Name }}" hint-placeholder-val="{{ false }}">
-      <div>
-        <div style="font-family:var(--font-display);font-size:14.5px;font-weight:600;color:var(--dc-gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em">{{ cat4Name }}</div>
-        <sc-for list="{{ cat4Items }}" as="item" hint-placeholder-count="3">
-          <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;font-size:13.5px;line-height:1.45;color:var(--text-muted)"><span style="color:var(--dc-gold);flex-shrink:0">✓</span><span>{{ item.text }}</span></div>
-        </sc-for>
-      </div>
-      </sc-if>
-      <sc-if value="{{ cat5Name }}" hint-placeholder-val="{{ false }}">
-      <div>
-        <div style="font-family:var(--font-display);font-size:14.5px;font-weight:600;color:var(--dc-gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em">{{ cat5Name }}</div>
-        <sc-for list="{{ cat5Items }}" as="item" hint-placeholder-count="3">
-          <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;font-size:13.5px;line-height:1.45;color:var(--text-muted)"><span style="color:var(--dc-gold);flex-shrink:0">✓</span><span>{{ item.text }}</span></div>
-        </sc-for>
-      </div>
-      </sc-if>
-    </div>
+    <a href="whats-included.html" target="_blank" rel="noopener" style="font-size:13px;font-weight:600;color:var(--dc-gold);text-decoration:underline;text-underline-offset:3px">See exactly what's included in every clean ↗</a>
   </div>
 </section>
 
@@ -591,52 +536,12 @@ const SHOWCASE_EXAMPLES = [
   { key: 'oven', label: 'Oven', before: 'assets/before-after/before-oven.jpg', after: 'assets/before-after/after-oven.jpg' },
   { key: 'fridge', label: 'Refrigerator', before: 'assets/before-after/before-fridge.jpg', after: 'assets/before-after/after-fridge.jpg' }
 ];
-const TIER_CHECKLISTS = {
-  standard: {
-    label: 'Standard Clean',
-    intro: 'Our recurring service — ideal weekly, bi-weekly, or monthly to keep a home consistently fresh.',
-    groups: [
-      { cat: 'Every Room', items: ['Dust all reachable surfaces, furniture & décor', 'Remove cobwebs', 'Clean mirrors', 'Spot-clean light switches & door handles', 'Empty trash & replace liners', 'Vacuum carpets & rugs', 'Vacuum & mop hard floors', 'Straighten cushions & general appearance'] },
-      { cat: 'Kitchen', items: ['Clean & sanitize countertops', 'Clean stovetop & exterior of appliances', 'Clean microwave inside & out', 'Clean & shine sink and faucet', 'Dust cabinet fronts', 'Wipe table & chairs'] },
-      { cat: 'Bathrooms', items: ['Clean & disinfect toilet (inside, outside)', 'Clean shower / tub', 'Clean & sanitize sink, faucet & vanity', 'Clean mirrors & polish fixtures', 'Vacuum & mop floor'] },
-      { cat: 'Bedrooms', items: ['Make beds (fresh linens if left out and added to service)', 'Dust nightstands, dressers & reachable décor'] }
-    ]
-  },
-  deep: {
-    label: 'Deep Clean',
-    intro: "Everything in the Standard Clean, plus the detail work that reaches built-up dust and grime — recommended for first-time visits, seasonal refreshes, or homes that haven't had professional cleaning recently.",
-    groups: [
-      { cat: 'Every Room, Refined', items: ['Baseboards dusted', 'Doors, door frames & handles detailed', 'Light switch plates & outlet covers detailed', 'Air vents & reachable ceiling fans dusted', 'Under & behind reachable furniture', 'Edges, corners & behind doors detailed', 'Furniture surfaces polished'] },
-      { cat: 'Kitchen & Bath Detail', items: ['Window sills & tracks cleaned', 'Blinds & shutters dusted', 'Interior windows (reachable) dusted', 'Cabinet fronts fully wiped (kitchen & baths)', 'Tile & grout scrubbed in showers', 'Faucets & showerheads descaled', 'Backsplash degreased & detailed'] }
-    ]
-  },
-  moveconstruction: {
-    label: 'Move-In/Out & Post Construction',
-    intro: 'Everything in the Deep Clean, plus full interior work — designed for empty (or nearly empty) homes and fresh builds, so every space is ready for its next chapter.',
-    groups: [
-      { cat: 'Deep Interior Clean', items: ['Inside oven cleaned & degreased', 'Inside refrigerator & freezer cleaned', 'Inside all cabinets, drawers & pantry (empty)', 'Inside closets & shelving wiped', 'Interior windows cleaned', 'Baseboards spot cleaned'] },
-      { cat: 'Fresh-Build Ready', items: ['Post-construction dust removal from all surfaces', 'Paint splatter spot-removal (gentle, on glass & tile)', 'Sticker & label removal from glass and fixtures', 'Garage / laundry area swept & wiped (if requested)', 'Blinds & shutters cleaned'] }
-    ]
-  },
-  commercial: {
-    label: 'Commercial',
-    intro: 'Service on your schedule — after hours, weekends, or between shifts. Fully insured teams · consistent staff · monthly invoicing available.',
-    groups: [
-      { cat: 'Workstations & Offices', items: ['Desks & reachable surfaces dusted', 'High-touch points disinfected', 'Interior glass & partitions spot-cleaned', 'Trash removed, liners replaced'] },
-      { cat: 'Restrooms', items: ['Toilets & fixtures fully disinfected', 'Sinks, counters & mirrors polished', 'Dispensers restocked from your supplies', 'Floors sanitized & dried'] },
-      { cat: 'Break Room', items: ['Counters & tables sanitized', 'Appliance exteriors & microwave interior', 'Sink, faucet & cabinet fronts'] },
-      { cat: 'Reception & Common Areas', items: ['Entry glass & doors, streak-free', 'Furniture straightened & dusted', 'First impressions, detailed daily'] },
-      { cat: 'Floors Throughout', items: ['Carpets vacuumed edge to edge', 'Hard floors swept & mopped'] }
-    ]
-  }
-};
-const TIER_ORDER = ['standard', 'deep', 'moveconstruction', 'commercial'];
 const CHECK_ON = 'background:var(--dc-gold);border-color:var(--dc-gold)';
 const SERVICE_DEFS = [
-  { idx:0, num:'01', label:'Residential', exploreTier:'standard', imgId:'service-residential', imgSrc:(window.__resources && window.__resources.svcResidential) || 'uploads/Imagenes_Web_DreamClean/02_Residential_2400w.jpg', imgPlaceholder:"Large-format close-up: a perfectly made bed, crisp white linens, folded camel-toned throw at the foot. Soft raking window light, shallow depth of field, true-to-life warm tones. Tight crop, negative space at top for the title. Feeling: boutique-hotel warmth, just turned down.", desc:"Recurring home cleaning, deep cleans, and move-in/move-out — the kind of finish that looks magazine-ready." },
-  { idx:1, num:'02', label:'Commercial', exploreTier:'commercial', imgId:'service-commercial', imgSrc:(window.__resources && window.__resources.svcCommercial) || 'uploads/Imagenes_Web_DreamClean/03_Commercial_2400w.jpg', imgPlaceholder:"Wide shot of a modern open-plan office lobby. Warm afternoon light across glass partitions and light-wood surfaces, one sculptural plant, no people. One-point perspective, negative space at base for the title. Feeling: calm, professional, quietly premium.", desc:'Offices, medical, and retail spaces cleaned on a schedule that never disrupts business hours.' },
-  { idx:2, num:'03', label:'Vacation Rentals', exploreTier:'standard', imgId:'service-rentals', imgSrc:(window.__resources && window.__resources.svcRentals) || 'uploads/Imagenes_Web_DreamClean/04_VacationRental_2400w.jpg', imgPlaceholder:"Styled vacation-rental living space: coastal-modern palette, neutral linen sofa with gold-toned pillows, large window with soft natural light. Slightly elevated angle, styled surfaces, clean space at bottom for the title. Feeling: guest-ready, aspirational, warm.", desc:'Airbnb & short-term rental turnovers, staged and ready before your next guest arrives.' },
-  { idx:3, num:'04', label:'Move-In / Move-Out', exploreTier:'moveconstruction', imgId:'service-moveout', imgSrc:(window.__resources && window.__resources.svcMoveout) || 'uploads/Imagenes_Web_DreamClean/05_MoveInOut_2400w.jpg', imgPlaceholder:"Empty, freshly cleaned room shot straight-on, wide-angle: gleaming bare hardwood, bright white walls, dust-free ceiling fan, soft light from an uncovered window. Symmetrical, centered vanishing point, negative space for the title. Feeling: a calm blank canvas, fully reset.", desc:'A full reset for closings, leases, renovations, and post-construction cleanup — floors to ceiling fans.' }
+  { idx:0, num:'01', label:'Residential', exploreHref:'whats-included.html#standard', imgId:'service-residential', imgSrc:(window.__resources && window.__resources.svcResidential) || 'uploads/Imagenes_Web_DreamClean/02_Residential_2400w.jpg', imgPlaceholder:"Large-format close-up: a perfectly made bed, crisp white linens, folded camel-toned throw at the foot. Soft raking window light, shallow depth of field, true-to-life warm tones. Tight crop, negative space at top for the title. Feeling: boutique-hotel warmth, just turned down.", desc:"Recurring home cleaning, deep cleans, and move-in/move-out — the kind of finish that looks magazine-ready." },
+  { idx:1, num:'02', label:'Commercial', exploreHref:'whats-included.html#commercial', imgId:'service-commercial', imgSrc:(window.__resources && window.__resources.svcCommercial) || 'uploads/Imagenes_Web_DreamClean/03_Commercial_2400w.jpg', imgPlaceholder:"Wide shot of a modern open-plan office lobby. Warm afternoon light across glass partitions and light-wood surfaces, one sculptural plant, no people. One-point perspective, negative space at base for the title. Feeling: calm, professional, quietly premium.", desc:'Offices, medical, and retail spaces cleaned on a schedule that never disrupts business hours.' },
+  { idx:2, num:'03', label:'Vacation Rentals', exploreHref:'whats-included.html#standard', imgId:'service-rentals', imgSrc:(window.__resources && window.__resources.svcRentals) || 'uploads/Imagenes_Web_DreamClean/04_VacationRental_2400w.jpg', imgPlaceholder:"Styled vacation-rental living space: coastal-modern palette, neutral linen sofa with gold-toned pillows, large window with soft natural light. Slightly elevated angle, styled surfaces, clean space at bottom for the title. Feeling: guest-ready, aspirational, warm.", desc:'Airbnb & short-term rental turnovers, staged and ready before your next guest arrives.' },
+  { idx:3, num:'04', label:'Move-In / Move-Out', exploreHref:'whats-included.html#moveconstruction', imgId:'service-moveout', imgSrc:(window.__resources && window.__resources.svcMoveout) || 'uploads/Imagenes_Web_DreamClean/05_MoveInOut_2400w.jpg', imgPlaceholder:"Empty, freshly cleaned room shot straight-on, wide-angle: gleaming bare hardwood, bright white walls, dust-free ceiling fan, soft light from an uncovered window. Symmetrical, centered vanishing point, negative space for the title. Feeling: a calm blank canvas, fully reset.", desc:'A full reset for closings, leases, renovations, and post-construction cleanup — floors to ceiling fans.' }
 ];
 const PROCESS_STEPS = [
   { num:'01', title:'Get your estimate', desc:'Answer a few quick questions — get an instant price range, no call required.' },
@@ -663,7 +568,6 @@ class Component extends DCLogic {
     estimateOpen: false,
     sliderPos: 50,
     showcaseKey: 'oven',
-    tier: 'standard',
     processStep: 0,
     calc: {
       step: 1, type: 'standard', freq: 'once', bedrooms: '2', bathrooms: '2', sqft: 1500,
@@ -688,6 +592,10 @@ class Component extends DCLogic {
   componentDidMount() {
     this.updateViewport = () => this.setState({ viewportW: window.innerWidth });
     window.addEventListener('resize', this.updateViewport);
+
+    if (window.location.hash === '#estimate') {
+      setTimeout(() => this.goEstimate(), 50);
+    }
 
     this.manifestoWords = this.manifestoOuterRef.current ? Array.from(this.manifestoOuterRef.current.querySelectorAll('[data-word]')) : [];
     this._lastProcessStep = 0;
@@ -801,14 +709,6 @@ class Component extends DCLogic {
   onSliderMove = (e) => { if (this.dragging) this.updateSlider(e); };
   onSliderUp = (e) => { this.dragging = false; };
   selectShowcase = (e) => { const key = e.currentTarget.dataset.key; this.setState({ showcaseKey: key, sliderPos: 50 }); };
-  selectTier = (e) => { const tier = e.currentTarget.dataset.tier; this.setState({ tier }); };
-  selectTierAndScroll = (e) => {
-    const tier = e.currentTarget.dataset.tier;
-    this.setState({ tier }, () => {
-      const el = document.getElementById('whats-included');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  };
   updateSlider(e) {
     const r = this.sliderRef.current.getBoundingClientRect();
     const pct = Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100));
@@ -1026,12 +926,6 @@ class Component extends DCLogic {
     const dots = [1, 2, 3, 4].map((n) => ({ n, style: n <= c.step ? 'background:var(--dc-gold)' : 'background:var(--border-subtle)' }));
     const showcase = SHOWCASE_EXAMPLES.find((x) => x.key === s.showcaseKey) || SHOWCASE_EXAMPLES[0];
     const showcaseTabs = SHOWCASE_EXAMPLES.map((x) => ({ key: x.key, label: x.label, style: x.key === s.showcaseKey ? SEL_STYLE : UNSEL_STYLE }));
-    const activeTier = TIER_CHECKLISTS[s.tier] || TIER_CHECKLISTS.standard;
-    const checklistGroups = activeTier.groups;
-    const groupItems = (i) => (checklistGroups[i] ? checklistGroups[i].items.map((t, ii) => ({ idx: ii, text: t })) : []);
-    const groupName = (i) => (checklistGroups[i] ? checklistGroups[i].cat : '');
-    const checklistNote = activeTier.intro;
-    const tierTabs = TIER_ORDER.map((key) => ({ tier: key, label: TIER_CHECKLISTS[key].label, style: key === s.tier ? SEL_STYLE : UNSEL_STYLE }));
 
     return {
       t: NAV_TXT[s.lang], toggleLang: this.toggleLang,
@@ -1052,13 +946,6 @@ class Component extends DCLogic {
       onSliderDown: this.onSliderDown, onSliderMove: this.onSliderMove, onSliderUp: this.onSliderUp,
       showcaseBeforeSrc: showcase.before, showcaseAfterSrc: showcase.after,
       showcaseTabs, selectShowcase: this.selectShowcase,
-      tierTabs, selectTier: this.selectTier, selectTierAndScroll: this.selectTierAndScroll,
-      checklistNote,
-      cat1Name: groupName(0), cat1Items: groupItems(0),
-      cat2Name: groupName(1), cat2Items: groupItems(1),
-      cat3Name: groupName(2), cat3Items: groupItems(2),
-      cat4Name: groupName(3), cat4Items: groupItems(3),
-      cat5Name: groupName(4), cat5Items: groupItems(4),
 
       processStepNum: proc.num, processStepTitle: proc.title, processStepDesc: proc.desc,
       processStepLabel: 'Step ' + (s.processStep + 1) + ' of 4', processDots,
