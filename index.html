@@ -49,7 +49,7 @@
 <header ref="{{ navRef }}" style="position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,5vw,64px);transition:padding .28s var(--ease-standard),background .28s var(--ease-standard),box-shadow .28s var(--ease-standard)">
   <a href="#top"><img src="assets/logos/horizontal_gold_espresso_on_transparent.png" alt="Dream Clean by DC" style="height:34px;display:block"></a>
   <nav style="display:{{ navLinksDisplay }};gap:34px;font-size:var(--text-small);letter-spacing:.02em">
-    <a href="#services" style-hover="color:var(--dc-gold)">{{ t.navServices }}</a>
+    <a href="whats-included.html" target="_blank" rel="noopener" style-hover="color:var(--dc-gold)">{{ t.navServices }}</a>
     <a href="#process" style-hover="color:var(--dc-gold)">{{ t.navProcess }}</a>
     <a href="#reviews" style-hover="color:var(--dc-gold)">{{ t.navReviews }}</a>
     <a href="https://dreamclean-by-dc.vercel.app" target="_blank" rel="noopener" style-hover="color:var(--dc-gold)">{{ t.navPortal }}</a>
@@ -71,7 +71,7 @@
 
 <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
   <div style="position:fixed;top:74px;left:0;right:0;z-index:499;background:var(--surface-canvas);display:flex;flex-direction:column;padding:24px;gap:18px;box-shadow:var(--shadow-lg);border-bottom:1px solid var(--border-subtle);font-size:15px">
-    <a href="#services" onClick="{{ toggleMenu }}">{{ t.navServices }}</a>
+    <a href="whats-included.html" target="_blank" rel="noopener" onClick="{{ toggleMenu }}">{{ t.navServices }}</a>
     <a href="#process" onClick="{{ toggleMenu }}">{{ t.navProcess }}</a>
     <a href="#reviews" onClick="{{ toggleMenu }}">{{ t.navReviews }}</a>
     <a href="https://dreamclean-by-dc.vercel.app" target="_blank" rel="noopener">{{ t.navPortal }}</a>
@@ -146,7 +146,6 @@
           <h3 style="font-family:var(--font-display);font-size:clamp(18px,1.8vw,26px);margin:0 0 8px;font-weight:600;white-space:nowrap">{{ svc.label }}</h3>
           <div style="overflow:hidden;transition:max-height .5s ease,opacity .4s ease;max-height:{{ svc.descMaxHeight }};opacity:{{ svc.descOpacity }}">
             <p style="font-size:13.5px;line-height:1.5;margin:0 0 8px">{{ svc.desc }}</p>
-            <a href="{{ svc.exploreHref }}" target="_blank" rel="noopener" style="font-size:12px;font-weight:600;color:var(--dc-gold-light);text-decoration:underline;text-underline-offset:3px">Explore {{ svc.label }} ↗</a>
           </div>
         </div>
       </div>
@@ -178,9 +177,6 @@
     <div style="position:absolute;top:0;bottom:0;width:3px;background:#fff;left:{{ sliderPos }}%;transform:translateX(-50%);box-shadow:0 0 12px rgba(0,0,0,.3)">
       <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);font-size:14px;color:var(--dc-espresso)">⇔</div>
     </div>
-  </div>
-  <div style="text-align:center;margin-top:28px">
-    <a href="whats-included.html" target="_blank" rel="noopener" style="font-size:13px;font-weight:600;color:var(--dc-gold);text-decoration:underline;text-underline-offset:3px">See exactly what's included in every clean ↗</a>
   </div>
 </section>
 
@@ -502,7 +498,7 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <div style="font-size:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dc-gold-light);margin-bottom:6px">Company</div>
-        <a href="#services" style="font-size:var(--text-small);color:var(--text-on-dark-muted)" style-hover="color:var(--text-on-dark)">Services</a>
+        <a href="whats-included.html" target="_blank" rel="noopener" style="font-size:var(--text-small);color:var(--text-on-dark-muted)" style-hover="color:var(--text-on-dark)">Services ↗</a>
         <a href="#process" style="font-size:var(--text-small);color:var(--text-on-dark-muted)" style-hover="color:var(--text-on-dark)">Process</a>
         <a onClick="{{ goEstimate }}" style="font-size:var(--text-small);color:var(--text-on-dark-muted);cursor:pointer" style-hover="color:var(--text-on-dark)">Estimate</a>
         <sc-if value="{{ showClientPortalLink }}" hint-placeholder-val="{{ true }}">

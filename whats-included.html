@@ -64,8 +64,11 @@
 
   footer{padding:32px 24px;text-align:center;font-size:var(--text-caption);color:var(--text-muted)}
 
+  @media (max-width:760px){
+    .nav-links a:not(.btn){display:none}
+    .nav-links{gap:12px}
+  }
   @media (max-width:640px){
-    .nav-links{gap:16px}
     .hero{padding:48px 20px 24px}
   }
 </style>
@@ -78,7 +81,10 @@
       <img src="assets/logos/horizontal_gold_espresso_on_transparent.png" alt="Dream Clean by DC" style="height:30px">
     </a>
     <div class="nav-links">
-      <a href="index.html">← Home</a>
+      <a href="index.html">Home</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a href="https://dreamclean-by-dc.vercel.app" target="_blank" rel="noopener">Client Portal ↗</a>
       <a class="btn btn-primary" href="index.html#estimate">Get a Free Estimate</a>
     </div>
   </div>
