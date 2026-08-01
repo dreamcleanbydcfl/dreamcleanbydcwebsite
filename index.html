@@ -214,7 +214,7 @@
         <div data-key="{{ tab.key }}" onClick="{{ selectShowcase }}" style="border:1px solid var(--border-subtle);border-radius:100px;padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;{{ tab.style }}">{{ tab.label }}</div>
       </sc-for>
     </div>
-    <div data-reveal="scale" ref="{{ sliderRef }}" onPointerDown="{{ onSliderDown }}" onPointerMove="{{ onSliderMove }}" onPointerUp="{{ onSliderUp }}" style="opacity:0;transform:scale(.96);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);position:relative;max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);cursor:ew-resize;user-select:none">
+    <div ref="{{ sliderRef }}" onPointerDown="{{ onSliderDown }}" onPointerMove="{{ onSliderMove }}" onPointerUp="{{ onSliderUp }}" style="opacity:1;transform:none;position:relative;max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);cursor:ew-resize;user-select:none">
       <div style="position:absolute;inset:-14px 14px auto -14px;top:auto;bottom:-14px;height:60%;border:1px solid var(--dc-gold);border-radius:20px;opacity:.3;transform:rotate(-1.2deg);pointer-events:none;z-index:-1"></div>
       <image-slot id="showcase-after" src="{{ showcaseAfterSrc }}" placeholder="AFTER — same room, same camera angle as Before: surfaces cleared and gleaming, cushions plumped, warm golden-hour light, styled like a magazine reveal. True-to-life warm grade, never cold. Feeling: calm, restored, editorial." shape="rect" style="position:absolute;inset:0;color:rgba(58,51,44,.22)"></image-slot>
       <div style="position:absolute;inset:0;overflow:hidden;clip-path:{{ beforeClip }}">
