@@ -158,24 +158,76 @@
     <h2 data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);font-family:var(--font-display);font-size:var(--text-display-lg);margin:0 0 18px;font-weight:600">Every visit ends the same way</h2>
     <p data-reveal="fade" style="opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);color:var(--text-muted);font-size:var(--text-body-lg);margin:0">Spotless surfaces, straightened rooms, and a space that feels reset — not just wiped down. Drag the divider to see the difference.</p>
   </div>
-  <div style="display:flex;justify-content:center;gap:10px;margin-bottom:24px;flex-wrap:wrap">
-    <sc-for list="{{ showcaseTabs }}" as="tab" hint-placeholder-count="2">
-      <div data-key="{{ tab.key }}" onClick="{{ selectShowcase }}" style="border:1px solid var(--border-subtle);border-radius:100px;padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;{{ tab.style }}">{{ tab.label }}</div>
-    </sc-for>
+  <div style="display:flex;justify-content:center;gap:10px;margin-bottom:32px;flex-wrap:wrap">
+    <div data-key="included" onClick="{{ selectShowcaseView }}" style="border:1px solid var(--border-subtle);border-radius:100px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;{{ viewToggleIncludedStyle }}">What's included</div>
+    <div data-key="beforeafter" onClick="{{ selectShowcaseView }}" style="border:1px solid var(--border-subtle);border-radius:100px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;{{ viewToggleBeforeAfterStyle }}">Before &amp; after</div>
   </div>
-  <div data-reveal="scale" ref="{{ sliderRef }}" onPointerDown="{{ onSliderDown }}" onPointerMove="{{ onSliderMove }}" onPointerUp="{{ onSliderUp }}" style="opacity:0;transform:scale(.96);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);position:relative;max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);cursor:ew-resize;user-select:none">
-    <div style="position:absolute;inset:-14px 14px auto -14px;top:auto;bottom:-14px;height:60%;border:1px solid var(--dc-gold);border-radius:20px;opacity:.3;transform:rotate(-1.2deg);pointer-events:none;z-index:-1"></div>
-    <image-slot id="showcase-after" src="{{ showcaseAfterSrc }}" placeholder="AFTER — same room, same camera angle as Before: surfaces cleared and gleaming, cushions plumped, warm golden-hour light, styled like a magazine reveal. True-to-life warm grade, never cold. Feeling: calm, restored, editorial." shape="rect" style="position:absolute;inset:0;color:rgba(58,51,44,.22)"></image-slot>
-    <div style="position:absolute;inset:0;overflow:hidden;clip-path:{{ beforeClip }}">
-      <image-slot id="showcase-before" src="{{ showcaseBeforeSrc }}" placeholder="BEFORE — same room, same angle: naturally lived-in — folded laundry, a few dishes, daily clutter — but warmly and evenly lit, never staged as grim or dirty. Feeling: authentically in-use, ready for its reset." shape="rect" style="position:absolute;inset:0;color:rgba(58,51,44,.22)"></image-slot>
+
+  <sc-if value="{{ showIncluded }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;justify-content:center;gap:8px;margin-bottom:24px">
+      <div data-key="residential" onClick="{{ selectChecklistType }}" style="border:1px solid var(--border-subtle);border-radius:100px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;transition:.15s;{{ checklistTypeResidentialStyle }}">Residential</div>
+      <div data-key="commercial" onClick="{{ selectChecklistType }}" style="border:1px solid var(--border-subtle);border-radius:100px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;transition:.15s;{{ checklistTypeCommercialStyle }}">Commercial</div>
     </div>
-    <img src="assets/logos/submark_gold_on_espresso.png" alt="" style="position:absolute;bottom:14px;right:14px;width:34px;opacity:.85;pointer-events:none;z-index:2">
-    <div style="position:absolute;top:16px;left:16px;padding:6px 14px;border-radius:100px;background:rgba(58,51,44,.55);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(4px)">Before</div>
-    <div style="position:absolute;top:16px;right:16px;padding:6px 14px;border-radius:100px;background:rgba(182,137,17,.85);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase">After</div>
-    <div style="position:absolute;top:0;bottom:0;width:3px;background:#fff;left:{{ sliderPos }}%;transform:translateX(-50%);box-shadow:0 0 12px rgba(0,0,0,.3)">
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);font-size:14px;color:var(--dc-espresso)">⇔</div>
+    <div style="max-width:960px;margin:0 auto;background:var(--surface-canvas);border:1px solid var(--border-subtle);border-radius:24px;padding:clamp(24px,4vw,48px);box-shadow:var(--shadow-lg)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:clamp(24px,4vw,36px)">
+        <div>
+          <div style="font-family:var(--font-display);font-size:14.5px;font-weight:600;color:var(--dc-gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em">{{ cat1Name }}</div>
+          <sc-for list="{{ cat1Items }}" as="item" hint-placeholder-count="4">
+            <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;font-size:13.5px;line-height:1.45;color:var(--text-muted)"><span style="color:var(--dc-gold);flex-shrink:0">✓</span><span>{{ item.text }}</span></div>
+          </sc-for>
+        </div>
+        <div>
+          <div style="font-family:var(--font-display);font-size:14.5px;font-weight:600;color:var(--dc-gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em">{{ cat2Name }}</div>
+          <sc-for list="{{ cat2Items }}" as="item" hint-placeholder-count="4">
+            <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;font-size:13.5px;line-height:1.45;color:var(--text-muted)"><span style="color:var(--dc-gold);flex-shrink:0">✓</span><span>{{ item.text }}</span></div>
+          </sc-for>
+        </div>
+        <div>
+          <div style="font-family:var(--font-display);font-size:14.5px;font-weight:600;color:var(--dc-gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em">{{ cat3Name }}</div>
+          <sc-for list="{{ cat3Items }}" as="item" hint-placeholder-count="4">
+            <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;font-size:13.5px;line-height:1.45;color:var(--text-muted)"><span style="color:var(--dc-gold);flex-shrink:0">✓</span><span>{{ item.text }}</span></div>
+          </sc-for>
+        </div>
+        <div>
+          <div style="font-family:var(--font-display);font-size:14.5px;font-weight:600;color:var(--dc-gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em">{{ cat4Name }}</div>
+          <sc-for list="{{ cat4Items }}" as="item" hint-placeholder-count="3">
+            <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;font-size:13.5px;line-height:1.45;color:var(--text-muted)"><span style="color:var(--dc-gold);flex-shrink:0">✓</span><span>{{ item.text }}</span></div>
+          </sc-for>
+        </div>
+        <div>
+          <div style="font-family:var(--font-display);font-size:14.5px;font-weight:600;color:var(--dc-gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em">{{ cat5Name }}</div>
+          <sc-for list="{{ cat5Items }}" as="item" hint-placeholder-count="3">
+            <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;font-size:13.5px;line-height:1.45;color:var(--text-muted)"><span style="color:var(--dc-gold);flex-shrink:0">✓</span><span>{{ item.text }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+      <p style="margin:24px 0 0;text-align:center;font-style:italic;color:var(--text-muted);font-size:13px">{{ checklistNote }}</p>
+      <div style="margin-top:20px;padding-top:22px;border-top:1px solid var(--border-subtle);text-align:center">
+        <button data-key="beforeafter" onClick="{{ selectShowcaseView }}" style="border:none;background:var(--dc-espresso);color:#fff;border-radius:100px;padding:12px 26px;font-size:13px;font-weight:600;cursor:pointer">See the before &amp; after →</button>
+      </div>
     </div>
-  </div>
+  </sc-if>
+
+  <sc-if value="{{ showBeforeAfter }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;justify-content:center;gap:10px;margin-bottom:24px;flex-wrap:wrap">
+      <sc-for list="{{ showcaseTabs }}" as="tab" hint-placeholder-count="2">
+        <div data-key="{{ tab.key }}" onClick="{{ selectShowcase }}" style="border:1px solid var(--border-subtle);border-radius:100px;padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;{{ tab.style }}">{{ tab.label }}</div>
+      </sc-for>
+    </div>
+    <div data-reveal="scale" ref="{{ sliderRef }}" onPointerDown="{{ onSliderDown }}" onPointerMove="{{ onSliderMove }}" onPointerUp="{{ onSliderUp }}" style="opacity:0;transform:scale(.96);transition:opacity .8s var(--ease-out-soft),transform .8s var(--ease-out-soft);position:relative;max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);cursor:ew-resize;user-select:none">
+      <div style="position:absolute;inset:-14px 14px auto -14px;top:auto;bottom:-14px;height:60%;border:1px solid var(--dc-gold);border-radius:20px;opacity:.3;transform:rotate(-1.2deg);pointer-events:none;z-index:-1"></div>
+      <image-slot id="showcase-after" src="{{ showcaseAfterSrc }}" placeholder="AFTER — same room, same camera angle as Before: surfaces cleared and gleaming, cushions plumped, warm golden-hour light, styled like a magazine reveal. True-to-life warm grade, never cold. Feeling: calm, restored, editorial." shape="rect" style="position:absolute;inset:0;color:rgba(58,51,44,.22)"></image-slot>
+      <div style="position:absolute;inset:0;overflow:hidden;clip-path:{{ beforeClip }}">
+        <image-slot id="showcase-before" src="{{ showcaseBeforeSrc }}" placeholder="BEFORE — same room, same angle: naturally lived-in — folded laundry, a few dishes, daily clutter — but warmly and evenly lit, never staged as grim or dirty. Feeling: authentically in-use, ready for its reset." shape="rect" style="position:absolute;inset:0;color:rgba(58,51,44,.22)"></image-slot>
+      </div>
+      <img src="assets/logos/submark_gold_on_espresso.png" alt="" style="position:absolute;bottom:14px;right:14px;width:34px;opacity:.85;pointer-events:none;z-index:2">
+      <div style="position:absolute;top:16px;left:16px;padding:6px 14px;border-radius:100px;background:rgba(58,51,44,.55);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(4px)">Before</div>
+      <div style="position:absolute;top:16px;right:16px;padding:6px 14px;border-radius:100px;background:rgba(182,137,17,.85);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase">After</div>
+      <div style="position:absolute;top:0;bottom:0;width:3px;background:#fff;left:{{ sliderPos }}%;transform:translateX(-50%);box-shadow:0 0 12px rgba(0,0,0,.3)">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);font-size:14px;color:var(--dc-espresso)">⇔</div>
+      </div>
+    </div>
+  </sc-if>
 </section>
 
 <!-- ===== PROCESS — pinned scrollytelling ===== -->
@@ -530,6 +582,22 @@ const SHOWCASE_EXAMPLES = [
   { key: 'oven', label: 'Oven', before: 'assets/before-after/before-oven.jpg', after: 'assets/before-after/after-oven.jpg' },
   { key: 'fridge', label: 'Refrigerator', before: 'assets/before-after/before-fridge.jpg', after: 'assets/before-after/after-fridge.jpg' }
 ];
+const CHECKLISTS = {
+  residential: [
+    { cat: 'Kitchen', items: ['Counters, backsplash & cabinet fronts', 'Appliance exteriors, polished', 'Sink & fixtures, descaled & shined', 'Floors vacuumed & mopped'] },
+    { cat: 'Bathrooms', items: ['Shower, tub & glass, descaled', 'Toilet, complete & disinfected', 'Vanity, mirror & fixtures', 'Towels styled, paper pointed & sealed'] },
+    { cat: 'Bedrooms', items: ['Beds neatly made & styled', 'Surfaces & décor, dusted with care', 'Mirrors & glass, streak-free'] },
+    { cat: 'Living Areas', items: ['Upholstery straightened & fluffed', 'Shelving, frames & electronics dusted', 'Baseboards, floors edge to edge'] },
+    { cat: 'Throughout', items: ['Trash removed, liners replaced', 'Switches & handles disinfected', 'Final walkthrough against checklist'] }
+  ],
+  commercial: [
+    { cat: 'Workstations & Offices', items: ['Desks & reachable surfaces dusted', 'High-touch points disinfected', 'Interior glass & partitions spot-cleaned', 'Trash removed, liners replaced'] },
+    { cat: 'Restrooms', items: ['Toilets & fixtures fully disinfected', 'Sinks, counters & mirrors polished', 'Dispensers restocked from your supplies', 'Floors sanitized & dried'] },
+    { cat: 'Break Room', items: ['Counters & tables sanitized', 'Appliance exteriors & microwave interior', 'Sink, faucet & cabinet fronts'] },
+    { cat: 'Reception & Common Areas', items: ['Entry glass & doors, streak-free', 'Furniture straightened & dusted', 'First impressions, detailed daily'] },
+    { cat: 'Floors Throughout', items: ['Carpets vacuumed edge to edge', 'Hard floors swept & mopped'] }
+  ]
+};
 const CHECK_ON = 'background:var(--dc-gold);border-color:var(--dc-gold)';
 const SERVICE_DEFS = [
   { idx:0, num:'01', label:'Residential', imgId:'service-residential', imgSrc:(window.__resources && window.__resources.svcResidential) || 'uploads/Imagenes_Web_DreamClean/02_Residential_2400w.jpg', imgPlaceholder:"Large-format close-up: a perfectly made bed, crisp white linens, folded camel-toned throw at the foot. Soft raking window light, shallow depth of field, true-to-life warm tones. Tight crop, negative space at top for the title. Feeling: boutique-hotel warmth, just turned down.", desc:"Recurring home cleaning, deep cleans, and move-in/move-out — the kind of finish that looks magazine-ready." },
@@ -562,6 +630,8 @@ class Component extends DCLogic {
     estimateOpen: false,
     sliderPos: 50,
     showcaseKey: 'oven',
+    showcaseView: 'included',
+    checklistType: 'residential',
     processStep: 0,
     calc: {
       step: 1, type: 'standard', freq: 'once', bedrooms: '2', bathrooms: '2', sqft: 1500,
@@ -699,6 +769,8 @@ class Component extends DCLogic {
   onSliderMove = (e) => { if (this.dragging) this.updateSlider(e); };
   onSliderUp = (e) => { this.dragging = false; };
   selectShowcase = (e) => { const key = e.currentTarget.dataset.key; this.setState({ showcaseKey: key, sliderPos: 50 }); };
+  selectShowcaseView = (e) => { const view = e.currentTarget.dataset.key; this.setState({ showcaseView: view }); };
+  selectChecklistType = (e) => { const type = e.currentTarget.dataset.key; this.setState({ checklistType: type }); };
   updateSlider(e) {
     const r = this.sliderRef.current.getBoundingClientRect();
     const pct = Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100));
@@ -916,6 +988,11 @@ class Component extends DCLogic {
     const dots = [1, 2, 3, 4].map((n) => ({ n, style: n <= c.step ? 'background:var(--dc-gold)' : 'background:var(--border-subtle)' }));
     const showcase = SHOWCASE_EXAMPLES.find((x) => x.key === s.showcaseKey) || SHOWCASE_EXAMPLES[0];
     const showcaseTabs = SHOWCASE_EXAMPLES.map((x) => ({ key: x.key, label: x.label, style: x.key === s.showcaseKey ? SEL_STYLE : UNSEL_STYLE }));
+    const checklistGroups = CHECKLISTS[s.checklistType] || CHECKLISTS.residential;
+    const groupItems = (i) => (checklistGroups[i] ? checklistGroups[i].items.map((t, ii) => ({ idx: ii, text: t })) : []);
+    const checklistNote = s.checklistType === 'commercial'
+      ? 'Service on your schedule — after hours, weekends, or between shifts.'
+      : "Our craft is cleaning — we work carefully around your personal items.";
 
     return {
       t: NAV_TXT[s.lang], toggleLang: this.toggleLang,
@@ -936,6 +1013,18 @@ class Component extends DCLogic {
       onSliderDown: this.onSliderDown, onSliderMove: this.onSliderMove, onSliderUp: this.onSliderUp,
       showcaseBeforeSrc: showcase.before, showcaseAfterSrc: showcase.after,
       showcaseTabs, selectShowcase: this.selectShowcase,
+      showIncluded: s.showcaseView === 'included', showBeforeAfter: s.showcaseView === 'beforeafter',
+      viewToggleIncludedStyle: s.showcaseView === 'included' ? SEL_STYLE : UNSEL_STYLE,
+      viewToggleBeforeAfterStyle: s.showcaseView === 'beforeafter' ? SEL_STYLE : UNSEL_STYLE,
+      selectShowcaseView: this.selectShowcaseView, selectChecklistType: this.selectChecklistType,
+      checklistTypeResidentialStyle: s.checklistType === 'residential' ? SEL_STYLE : UNSEL_STYLE,
+      checklistTypeCommercialStyle: s.checklistType === 'commercial' ? SEL_STYLE : UNSEL_STYLE,
+      checklistNote,
+      cat1Name: checklistGroups[0].cat, cat1Items: groupItems(0),
+      cat2Name: checklistGroups[1].cat, cat2Items: groupItems(1),
+      cat3Name: checklistGroups[2].cat, cat3Items: groupItems(2),
+      cat4Name: checklistGroups[3].cat, cat4Items: groupItems(3),
+      cat5Name: checklistGroups[4].cat, cat5Items: groupItems(4),
 
       processStepNum: proc.num, processStepTitle: proc.title, processStepDesc: proc.desc,
       processStepLabel: 'Step ' + (s.processStep + 1) + ' of 4', processDots,
