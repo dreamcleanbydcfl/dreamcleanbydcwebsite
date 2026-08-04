@@ -1,18 +1,57 @@
 /* =====================================================================
-   Dream Clean by DC — Legal add-on (cookie consent + legal footer)
+   Dream Clean by DC — Legal add-on (cookie consent + legal footer + GA4)
    Dream Clean by Dalila Cerezo LLC
    Add to ANY site with ONE line before </body>:
        <script src="/dc-legal.js" defer></script>
    - Injects a bilingual (EN/ES) cookie consent banner.
    - Injects a slim legal-links bar (Privacy · Cookies · Terms · Accessibility).
+   - Google Analytics 4 (G-BL264JTR29) via Consent Mode v2: the tag loads on
+     every page (so it's detectable/verifiable) but analytics & ad storage
+     stay DENIED until the visitor accepts cookies.
    - Reads language from localStorage "dc_lang" (en/es), default en.
-   - Put your Meta Pixel / Google Analytics inside dcLoadTracking() so they
-     only fire AFTER the visitor accepts. Choice stored in localStorage.
    ===================================================================== */
 (function () {
   var BASE = "https://www.dreamcleanbydc.com"; // legal pages live on the main site
+  var GA_ID = "G-BL264JTR29";
   var lang = "en";
   try { if (localStorage.getItem("dc_lang") === "es") lang = "es"; } catch (e) {}
+
+  /* ---------------- Google Analytics 4 + Consent Mode v2 ---------------- */
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = window.gtag || gtag;
+
+  var KEY = "dc_cookie_consent";
+  function getConsent(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function setConsent(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+  // Default: deny everything until the visitor accepts (remember prior "accept").
+  var prior = getConsent();
+  var granted = (prior === "all");
+  gtag('consent', 'default', {
+    ad_storage: granted ? 'granted' : 'denied',
+    ad_user_data: granted ? 'granted' : 'denied',
+    ad_personalization: granted ? 'granted' : 'denied',
+    analytics_storage: granted ? 'granted' : 'denied'
+  });
+
+  // Load the GA tag on EVERY page (present/detectable; respects consent above).
+  var gaScript = document.createElement('script');
+  gaScript.async = true;
+  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(gaScript);
+  gtag('js', new Date());
+  gtag('config', GA_ID);
+
+  // Grant analytics/ads once the visitor accepts. (Add Meta Pixel here too later.)
+  window.dcLoadTracking = function () {
+    gtag('consent', 'update', {
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      analytics_storage: 'granted'
+    });
+  };
 
   var T = {
     en: {
@@ -46,7 +85,8 @@
     '#dc-cookie .ok{background:#B8933D;color:#2C221C}#dc-cookie .ok:hover{background:#C9A24B}' +
     '#dc-cookie .no{background:transparent;color:#F6F1E9;border:1px solid rgba(246,241,233,.5)}' +
     '#dc-legal-bar{background:#2C221C;color:#C9BEB0;text-align:center;padding:20px 16px;' +
-    'font-family:Inter,-apple-system,sans-serif;font-size:12.5px;line-height:1.8}' +
+    'font-family:Inter,-apple-system,sans-serif;font-size:12.5px;line-height:1.8;' +
+    'width:100%;box-sizing:border-box;flex:0 0 100%}' +
     '#dc-legal-bar a{color:#C9A24B;text-decoration:none;margin:0 7px}#dc-legal-bar a:hover{text-decoration:underline}' +
     '#dc-legal-bar .c{margin-top:10px;color:#9a8d7f}';
   var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
@@ -62,17 +102,14 @@
     '<a href="' + BASE + '/accessibility">' + T.access + '</a></nav>' +
     '<div class="c">© 2026 Dream Clean by Dalila Cerezo LLC · Dream Clean by DC · Orlando, Central Florida · Licensed · Insured</div>';
   document.body.appendChild(bar);
+  // If the page body is a flex/grid container, keep the footer full-width below the content.
+  try {
+    var disp = getComputedStyle(document.body).display;
+    if (disp.indexOf('flex') !== -1) { document.body.style.flexWrap = 'wrap'; }
+    else if (disp.indexOf('grid') !== -1) { bar.style.gridColumn = '1 / -1'; }
+  } catch (e) {}
 
-  /* ---------- cookie consent ---------- */
-  var KEY = "dc_cookie_consent";
-  function get(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
-  function set(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
-
-  window.dcLoadTracking = function () {
-    if (window.__dcTrackingLoaded) return; window.__dcTrackingLoaded = true;
-    /* >>> Paste your Meta Pixel and Google Analytics snippets here <<< */
-  };
-
+  /* ---------- cookie consent banner ---------- */
   var box = document.createElement("div");
   box.id = "dc-cookie";
   box.setAttribute("role", "dialog");
@@ -85,11 +122,9 @@
 
   function show(){ box.classList.add("show"); }
   function hide(){ box.classList.remove("show"); }
-  document.getElementById("dc-ok").addEventListener("click", function(){ set("all"); hide(); window.dcLoadTracking(); });
-  document.getElementById("dc-no").addEventListener("click", function(){ set("essential"); hide(); });
+  document.getElementById("dc-ok").addEventListener("click", function(){ setConsent("all"); hide(); window.dcLoadTracking(); });
+  document.getElementById("dc-no").addEventListener("click", function(){ setConsent("essential"); hide(); });
   window.dcOpenCookiePrefs = function(){ show(); };
 
-  var c = get();
-  if (c === "all") window.dcLoadTracking();
-  else if (c !== "essential") show();
+  if (prior !== "all" && prior !== "essential") show(); // first visit → ask
 })();
