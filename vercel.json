@@ -1,4 +1,1 @@
-{
-  "cleanUrls": true,
-  "trailingSlash": false
-}
+{"cleanUrls": true, "trailingSlash": false, "redirects": [{"source": "/review", "destination": "https://g.page/r/Cdkk2zxXaDPmEBM/review", "permanent": false}, {"source": "/reviews", "destination": "https://g.page/r/Cdkk2zxXaDPmEBM/review", "permanent": false}]}
