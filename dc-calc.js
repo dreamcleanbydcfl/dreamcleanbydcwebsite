@@ -4,9 +4,9 @@
  *
  * Qué hace, en orden:
  *   1. Encuentra el campo de dirección y el control de sq ft de la página
- *   2. Si el campo NO lo maneja React → lo clona para matar el autocompletado
+ *   2. Si el campo NO lo maneja React, lo clona para matar el autocompletado
  *      de Nominatim (prohibido por OpenStreetMap) y le pone Google Places
- *   3. Si SÍ lo maneja React → no lo toca, y solo busca el sq ft al salir del
+ *   3. Si SÍ lo maneja React, no lo toca, y solo busca el sq ft al salir del
  *      campo. Menos vistoso, pero cero riesgo de romper la calculadora.
  *   4. Nunca hace nada si no encuentra los dos campos.
  *
@@ -30,7 +30,7 @@
     }
   }
 
-  // ¿Este input lo controla React? Si sí, no lo tocamos.
+  // Este input lo controla React? Si si, no lo tocamos.
   function isReactManaged(el) {
     for (var k in el) {
       if (k.indexOf('__reactProps') === 0 ||
@@ -38,6 +38,16 @@
           k.indexOf('__reactEventHandlers') === 0) return true;
     }
     return !!el._valueTracker;
+  }
+
+  // Tiene algun digito? (sin regex a proposito: los backslashes se corrompen
+  // facil al copiar el archivo entre herramientas y el bug es invisible)
+  function hasDigit(s) {
+    for (var i = 0; i < s.length; i++) {
+      var c = s.charCodeAt(i);
+      if (c >= 48 && c <= 57) return true;
+    }
+    return false;
   }
 
   // Escribe un valor de forma que React también se entere
@@ -69,7 +79,7 @@
     var ranges = [].slice.call(document.querySelectorAll('input[type=range]'));
     for (var i = 0; i < ranges.length; i++) {
       var min = Number(ranges[i].min), max = Number(ranges[i].max);
-      // El slider de sq ft va de cientos a miles. El de "ventanas" va de 0 a 10.
+      // El slider de sq ft va de cientos a miles. El de ventanas va de 0 a 10.
       if (min >= 100 && max >= 1000) return ranges[i];
     }
     return null;
@@ -201,7 +211,7 @@
     var sqftInput = findSqftInput();
 
     if (!addressInput || !sqftInput) {
-      log('no encontré los campos, no hago nada');
+      log('no encontre los campos, no hago nada');
       return;
     }
 
@@ -232,7 +242,7 @@
       el.addEventListener('blur', function () {
         if (el.dataset.dcLookup) return;
         var v = el.value.trim();
-        if (v.length >= MIN_ADDR_LEN && /\\d/.test(v)) run(v, false);
+        if (v.length >= MIN_ADDR_LEN && hasDigit(v)) run(v, false);
       });
       el.addEventListener('input', function () {
         if (!el.value.trim()) {
