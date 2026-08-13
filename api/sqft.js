@@ -21,11 +21,11 @@ const MIN_SQFT = 200;
 const MAX_SQFT = 25000;
 
 function setCors(req, res) {
-  const origin = req.headers.origin || '';
-  if (ALLOWED_ORIGINS.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  res.setHeader('Vary', 'Origin');
+  // Siempre *: la respuesta son datos publicos del catastro, sin secretos
+  // ni datos del cliente. Ademas evita un bug feo: el CDN cachea la primera
+  // respuesta, y si esa no traia cabecera CORS, los demas sitios se quedaban
+  // sin poder leerla (le pasaba a card y atrium).
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }
