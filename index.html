@@ -802,10 +802,10 @@ class Component extends DCLogic {
   calcAddonsTotal(c) {
     let t = 0;
     if (c.type === 'standard' || c.type === 'deep') {
-      if (c.addons.oven) t += 40;
-      if (c.addons.fridge) t += 40;
-      t += c.addons.window * 3;
-      if (c.addons.cabinets) t += 50;
+      if (c.addons.oven) t += 50;
+      if (c.addons.fridge) t += 45;
+      t += c.addons.window * 10;
+      if (c.addons.cabinets) t += 75;
       if (c.addons.baseboards) t += 60;
     }
     if (c.type === 'move') { if (c.addons.pressure) t += 200; if (c.addons.paint) t += c.addons.paintSqft * 2; }
