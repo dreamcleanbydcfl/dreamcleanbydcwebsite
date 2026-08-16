@@ -517,11 +517,11 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;enableCustomCursor&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Interactivity&quot;},&quot;enableSmoothScroll&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Interactivity&quot;},&quot;showClientPortalLink&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
 const RATES = {
-  standard: { low: 0.16, high: 0.19, min: 120, name: "standard clean" },
-  deep:     { low: 0.24, high: 0.26, min: 200, name: "deep clean" },
-  move:     { low: 0.27, high: 0.33, min: 240, name: "move-in / move-out" }
+  standard: { low: 0.171, high: 0.19, min: 175, name: "standard clean" },
+  deep:     { low: 0.252, high: 0.28, min: 275, name: "deep clean" },
+  move:     { low: 0.288, high: 0.32, min: 325, name: "move-in / move-out" }
 };
-const DISCOUNT   = { once:0, weekly:0.15, biweekly:0.10, monthly:0.05 };
+const DISCOUNT   = { once:0, weekly:0.20, biweekly:0.10, monthly:0.05 };
 const FREQ_LABEL = { once:"One-time", weekly:"Weekly", biweekly:"Biweekly", monthly:"Monthly" };
 const FREQ_BY_TYPE = { standard:["once","weekly","biweekly","monthly"], deep:["once","monthly"], move:["once"] };
 const BATH_EXTRA = { low: 8, high: 12 };
