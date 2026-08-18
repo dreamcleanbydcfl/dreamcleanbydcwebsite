@@ -334,7 +334,7 @@
           </div>
 
           <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border-subtle);border-radius:6px;padding:12px 14px;margin-bottom:8px">
-            <div style="font-size:12.5px;font-weight:700;color:var(--dc-espresso)">Interior Windows</div>
+            <div style="font-size:12.5px;font-weight:700;color:var(--dc-espresso)">Interior Windows (quoted on site)</div>
             <div style="display:flex;align-items:center;gap:9px">
               <button data-q="window" data-d="-1" onClick="{{ changeQty }}" style="width:25px;height:25px;border-radius:50%;border:1px solid var(--border-subtle);background:#fff;font-size:14px;cursor:pointer;line-height:1">−</button>
               <span style="min-width:14px;text-align:center;font-weight:700;font-size:13px;color:var(--dc-espresso)">{{ windowQty }}</span>
@@ -354,7 +354,7 @@
               <span style="flex:0 0 18px;width:18px;height:18px;border:1.5px solid var(--border-subtle);border-radius:5px;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff;{{ baseboardsCheckStyle }}">
                 <sc-if value="{{ baseboardsOn }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#fff;stroke-width:3;fill:none"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
               </span>
-              <div style="font-size:12.5px;font-weight:700;color:var(--dc-espresso)">Baseboards &amp; Walls</div>
+              <div style="font-size:12.5px;font-weight:700;color:var(--dc-espresso)">Blinds — detailing (quoted on site)</div>
             </div>
           </div>
         </div>
@@ -804,9 +804,9 @@ class Component extends DCLogic {
     if (c.type === 'standard' || c.type === 'deep') {
       if (c.addons.oven) t += 50;
       if (c.addons.fridge) t += 45;
-      t += c.addons.window * 10;
+      t += c.addons.window * 0;
       if (c.addons.cabinets) t += 75;
-      if (c.addons.baseboards) t += 60;
+      if (c.addons.baseboards) t += 0;
     }
     if (c.type === 'move') { if (c.addons.pressure) t += 200; if (c.addons.paint) t += c.addons.paintSqft * 2; }
     return t;
@@ -817,9 +817,9 @@ class Component extends DCLogic {
       if (c.addons.pets) list.push('Pets in home');
       if (c.addons.oven) list.push('Oven');
       if (c.addons.fridge) list.push('Refrigerator');
-      if (c.addons.window) list.push('Interior Windows x' + c.addons.window);
+      if (c.addons.window) list.push('Interior windows x' + c.addons.window + ' - quoted on site');
       if (c.addons.cabinets) list.push('Interior Cabinets');
-      if (c.addons.baseboards) list.push('Baseboards & Walls');
+      if (c.addons.baseboards) list.push('Blinds detailing - quoted on site');
     }
     if (c.type === 'move') {
       if (c.addons.pressure) list.push('Pressure Washing');
