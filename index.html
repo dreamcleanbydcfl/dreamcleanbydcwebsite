@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +16,26 @@
     <text x="600" y="560" font-family="Arial,sans-serif" font-size="34" letter-spacing="4" fill="#F1E9DF" text-anchor="middle">DREAM CLEAN BY DC</text>
   </svg>
 </template>
+  <!-- SEO y compartir en redes - anadido 2026-09. Antes la pagina no tenia description, canonical, Open Graph ni datos estructurados: al compartir el link por WhatsApp o Facebook salia un enlace pelado sin titulo ni imagen, y Google no tenia de donde sacar el negocio. -->
+  <meta name="description" content="Luxury residential &amp; commercial cleaning in Orlando and Central Florida. Recurring cleans, deep cleans, move-in/out and Airbnb turnovers. Free instant estimate.">
+  <link rel="canonical" href="https://www.dreamcleanbydc.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dream Clean by DC">
+  <meta property="og:url" content="https://www.dreamcleanbydc.com/">
+  <meta property="og:title" content="Dream Clean by DC - Luxury Cleaning, Orlando FL">
+  <meta property="og:description" content="Luxury residential &amp; commercial cleaning in Orlando and Central Florida. Free instant estimate - no call required.">
+  <meta property="og:image" content="https://www.dreamcleanbydc.com/uploads/Imagenes_Web_DreamClean/01_Banner_Hero_2400w.jpg">
+  <meta property="og:image:alt" content="A bright, freshly cleaned living room">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dream Clean by DC - Luxury Cleaning, Orlando FL">
+  <meta name="twitter:description" content="Luxury residential &amp; commercial cleaning in Orlando and Central Florida. Free instant estimate.">
+  <meta name="twitter:image" content="https://www.dreamcleanbydc.com/uploads/Imagenes_Web_DreamClean/01_Banner_Hero_2400w.jpg">
+  <meta name="theme-color" content="#3A332A">
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"HouseCleaningService","name":"Dream Clean by DC","legalName":"Dream Clean by Dalila Cerezo LLC","url":"https://www.dreamcleanbydc.com/","logo":"https://www.dreamcleanbydc.com/assets/logos/submark_gold_on_espresso.png","image":"https://www.dreamcleanbydc.com/uploads/Imagenes_Web_DreamClean/01_Banner_Hero_2400w.jpg","description":"Luxury residential and commercial cleaning in Orlando and Central Florida. Recurring home cleaning, deep cleans, move-in/move-out and vacation rental turnovers.","telephone":"+1-407-476-3556","email":"info@dreamcleanbydc.com","priceRange":"$$","areaServed":[{"@type":"City","name":"Orlando"},{"@type":"Place","name":"Central Florida"}],"address":{"@type":"PostalAddress","addressLocality":"Orlando","addressRegion":"FL","addressCountry":"US"},"sameAs":["https://instagram.com/dreamcleanbydc","https://facebook.com/dreamcleanbydc"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Cleaning services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Residential cleaning"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Commercial cleaning"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Vacation rental turnover"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Move-in / move-out cleaning"}}]}}
+  </script>
 </head>
 <body>
 <x-dc>
@@ -39,6 +59,8 @@
   @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   ::-webkit-scrollbar{display:none}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  /* MOVIL - anadido 2026-09. SERVICIOS: eran 4 tiras verticales; las 3 inactivas se quedaban en su min-width de 64px y los titulos (white-space:nowrap) se cortaban a dos letras. Pasan a tarjetas apiladas. PROCESS: el numero (minimo 6rem = 96px) se comia su propia columna y dejaba ~216px al texto, que se partia en 5 o 6 lineas y se encimaba con los puntos de progreso; ahora va arriba. */
+  @media (max-width:780px){#services > div[data-reveal]{display:block!important;height:auto!important;border-radius:0!important;overflow:visible!important;padding:0 20px!important}#services > div[data-reveal] > div[data-idx]{flex:none!important;min-width:0!important;width:100%!important;height:190px!important;margin-bottom:10px!important;border-radius:16px!important}#services > div[data-reveal] > div[data-idx] h3{white-space:normal!important;font-size:21px!important}#services > div[data-reveal] > div[data-idx] div[style*="max-height"]{max-height:none!important;opacity:1!important}#process div[style*="auto 1fr"]{grid-template-columns:1fr!important;gap:2px!important}#process div[style*="auto 1fr"] > div:first-child{font-size:52px!important;line-height:1!important}}
 </style>
 </helmet>
 
